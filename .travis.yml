@@ -1,4 +1,5 @@
 language: cpp
+sudo: true
 env:
     - os="linux64"
     - os="linux32"
