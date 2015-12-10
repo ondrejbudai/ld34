@@ -1,0 +1,9 @@
+language: cpp
+env:
+    - os="linux64"
+    - os="linux32"
+    - os="win32"
+before_install:
+    - "./Travis-before-install.sh $os"
+script:
+    - "./Travis-script.sh $os"
