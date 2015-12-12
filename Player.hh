@@ -4,8 +4,9 @@
 #include "Renderer.hh"
 #include "Listeners.hh"
 #include "Texture.hh"
+#include "Entity.hh"
 
-class Player : public Listener {
+class Player : public Listener, public Entity {
 	private:
 		Renderer* renderer;
 		Texture* texture;

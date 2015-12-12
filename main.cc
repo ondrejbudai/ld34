@@ -14,6 +14,8 @@
 int main(int argc, char* argv[]){
 	(void) argc; (void) argv;
 	using namespace std;
+
+	std::vector<Entity *> entityList;
 	
 	Renderer renderer(HSIZE, VSIZE, "Ludum Dare 34");
 	if(!renderer.isOk()){
@@ -24,9 +26,11 @@ int main(int argc, char* argv[]){
 
 	InputHandler* input = InputHandler::getInstance();
 	Player player(&renderer);
+	entityList.push_back(&player);
 
 	input->registerKey(SDLK_s, &player);
 	input->registerKey(SDLK_l, &player);
+	input->registerKey(SDLK_d, &player);
 
 	bool running = true;
 	unsigned long lastFrame = 0;
@@ -38,7 +42,11 @@ int main(int argc, char* argv[]){
 		lastFrame += 1000 / 60;
 		running = input->update();
 		renderer.clear();
-		player.update();
+		
+		for(auto i = entityList.begin(); i != entityList.end(); ++i){
+			(*i)->update();
+		}
+
 		player.render();
 		renderer.update();
 	}

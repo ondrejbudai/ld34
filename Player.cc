@@ -20,7 +20,7 @@ void Player::event(SDL_Event *e){
 			else
 				xv += 5;
 			break;
-		case SDLK_l:
+	 	case SDLK_l:
 			if(e->key.type == SDL_KEYDOWN)
 				xv += 5;
 			else
