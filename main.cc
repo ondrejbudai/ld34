@@ -9,12 +9,13 @@
 #include "Texture.hh"
 #include "InputHandler.hh"
 #include "Player.hh"
+#include "global.hh"
 
 int main(int argc, char* argv[]){
 	(void) argc; (void) argv;
 	using namespace std;
 	
-	Renderer renderer(800, 600, "Ludum Dare 34");
+	Renderer renderer(HSIZE, VSIZE, "Ludum Dare 34");
 	if(!renderer.isOk()){
 		cout << "Ending program" << endl;
 		return EXIT_FAILURE;
