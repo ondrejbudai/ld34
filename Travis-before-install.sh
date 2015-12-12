@@ -8,6 +8,7 @@ case "$os" in
     # our dependencies to be able to compile a 32bit binary. Ubuntu...
     chroot="$PWD"/buildroot.i386
     mkdir -p "$chroot$PWD"
+	sudo apt-get update -qq
     sudo apt-get install -y debootstrap
     sudo i386 debootstrap --arch=i386 precise "$chroot"
     sudo mount --rbind "$PWD" "$chroot$PWD"
