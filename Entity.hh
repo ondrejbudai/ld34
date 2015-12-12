@@ -19,6 +19,16 @@ class Entity {
 		virtual bool isEnemy(){return true;}
 		int getX(){return x;}
 		int getY(){return y;}
+		int getW(){return texture->getWidth();}
+		int getH(){return texture->getHeight();}
+		virtual bool colliding(Entity *e){
+			return !(
+				x + texture->getWidth() < e->getX() ||
+				e->getX() + e->getW() < x ||
+				y + texture->getHeight() < e->getY() ||
+				e->getY() + e->getH() < y
+				);
+		}
 };
 
 #endif

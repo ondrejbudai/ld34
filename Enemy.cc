@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "Enemy.hh"
 #include "Game.hh"
 #include "Bullet.hh"
@@ -15,13 +17,22 @@ void Enemy::update(){
 	x += vx;
 	y += vy;
 
+	Game* g = Game::getInstance();
+
 	if(x < 0){
-		Game::getInstance()->removeEntity(this);
+		g->removeEntity(this);
 		return;
 	}
 
+	Player* p = g->getPlayer();
+	if(colliding(p)){
+		int pHealth = p->getHealth();
+		int d = pHealth < health ? pHealth : health;
+		p->damage(d);
+		damage(d);
+	}
+
 	if(cooldown == 0){
-		Game* g = Game::getInstance();
 		Player *p = g->getPlayer();
 		int dx = p->getX() - x;
 		int dy = p->getY() - y;
@@ -31,7 +42,7 @@ void Enemy::update(){
 		dx = dx / sqrt(magnitude) * 10;
 		dy = dy / sqrt(magnitude) * 10;
 
-		g->addEntity(new Bullet(renderer, x - 50, y, dx, dy, isEnemy()));
+		//g->addEntity(new Bullet(renderer, x - 50, y, dx, dy, isEnemy()));
 		cooldown = 30;
 	}
 	cooldown--;
