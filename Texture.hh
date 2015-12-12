@@ -11,6 +11,7 @@ private:
 	int w, h;
 	const Renderer* renderer;
 public:
+	Texture(const char* filename, const Renderer* renderer_);
 	~Texture();
 	void render(int x, int y);
 	void render(int x, int y, int w, int h);

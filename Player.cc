@@ -1,4 +1,6 @@
 #include "Player.hh"
+#include "Bullet.hh"
+#include "Game.hh"
 #include "global.hh"
 
 
@@ -25,6 +27,13 @@ void Player::event(SDL_Event *e){
 				xv += 5;
 			else
 				xv -= 5;
+			break;
+		case SDLK_d:
+			if(e->key.type == SDL_KEYDOWN)
+				shooting = true;
+			else
+				shooting = false;
+			break;
 	}
 }
 
@@ -34,6 +43,11 @@ void Player::update(){
 		x = 0;
 	else if(x > HSIZE)
 		x = HSIZE;
+	if(shooting){
+		Bullet* b = new Bullet(renderer, x, y);
+		Game * g = Game::getInstance();
+		g->addEntity(b);
+	}
 }
 
 void Player::render(){

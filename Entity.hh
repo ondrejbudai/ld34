@@ -5,8 +5,8 @@ class Entity {
 	private:
 		
 	public:
-		virtual void update() = 0;
-		virtual void render() = 0;
+		virtual void update(){}
+		virtual void render(){}
 };
 
 #endif

@@ -28,7 +28,7 @@ enum Align {RIGHT, LEFT};
 	int getWidth(){return width;}
 
 
-	const SDL_Color cBlack = {0, 0, 0};
+	const SDL_Color cBlack = {0, 0, 0, 0};
 };
 
 #endif

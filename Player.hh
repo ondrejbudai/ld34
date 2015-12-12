@@ -12,6 +12,7 @@ class Player : public Listener, public Entity {
 		Texture* texture;
 		int x, y;
 		int xv, yv;
+		bool shooting = false;
 	public:
 		Player(Renderer* r);
 		~Player(){}

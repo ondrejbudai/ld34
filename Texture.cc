@@ -18,7 +18,18 @@ Texture::Texture(SDL_Surface* from, const Renderer* renderer_){
 		return;
 	}
 
+	SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+
 	ok = true;
+}
+
+Texture::Texture(const char* filename, const Renderer* renderer_){
+	renderer = renderer_;
+	ok = false;
+	texture = IMG_LoadTexture(*renderer, filename);
+	SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+	if(texture != nullptr)
+		ok = true;
 }
 
 void Texture::render(int x, int y){

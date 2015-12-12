@@ -41,7 +41,8 @@ Renderer::Renderer(int width_, int height_, const char *windowName){
 	}
 
 
-	SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
+	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xff);
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	SDL_RenderClear(renderer);
 
 	SDL_RendererInfo info;
@@ -89,7 +90,7 @@ void Renderer::update(){
 }
 
 void Renderer::clear(){
-	SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
+	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xff);
 	SDL_RenderClear(renderer);
 }
 
