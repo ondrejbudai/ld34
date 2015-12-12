@@ -7,8 +7,8 @@
 Player::Player(Renderer* renderer_){
 	renderer = renderer_;
 	texture = Texture::createFromFile("./img/player.png", renderer);
-	x = 100;
-	y = 600;
+	x = texture->getWidth() / 2;
+	y = VSIZE / 2 + texture->getHeight() / 2;
 	xv = 0;
 	yv = 0;
 }
@@ -16,37 +16,39 @@ Player::Player(Renderer* renderer_){
 void Player::event(SDL_Event *e){
 	if(e->key.repeat) return;
 	switch(e->key.keysym.sym){
-		case SDLK_s:
+		case SDLK_UP:
 			if(e->key.type == SDL_KEYDOWN)
-				xv -= 5;
+				yv -= 5;
 			else
-				xv += 5;
+				yv += 5;
 			break;
-	 	case SDLK_l:
+	 	case SDLK_DOWN:
 			if(e->key.type == SDL_KEYDOWN)
-				xv += 5;
+				yv += 5;
 			else
-				xv -= 5;
+				yv -= 5;
 			break;
-		case SDLK_d:
-			if(e->key.type == SDL_KEYDOWN)
+		case SDLK_w:
+			if(e->key.type == SDL_KEYDOWN){
 				shooting = true;
-			else
+			} else
 				shooting = false;
+			break;
+		default:
 			break;
 	}
 }
 
 void Player::update(){
-	x += xv;
-	if(x < 0)
-		x = 0;
-	else if(x > HSIZE)
-		x = HSIZE;
+	y += yv;
+	if(y < 0)
+		y = 0;
+	else if(y > HSIZE)
+		y = HSIZE;
 	if(shooting){
-		Bullet* b = new Bullet(renderer, x, y);
 		Game * g = Game::getInstance();
-		g->addEntity(b);
+		g->addEntity(new Bullet(renderer, x + texture->getWidth() / 2, y - texture->getHeight() / 2));
+		g->addEntity(new Bullet(renderer, x + texture->getWidth() / 2, y + texture->getHeight() / 2));
 	}
 }
 

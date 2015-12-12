@@ -3,6 +3,7 @@
 #include "global.hh"
 #include "Renderer.hh"
 #include "InputHandler.hh"
+#include "Enemy.hh"
 #include <iostream>
 
 Game* Game::instance;
@@ -27,6 +28,14 @@ void Game::removeEntity(Entity *e){
 	toDelList.push_back(e);
 }
 
+Entity* Game::getColliding(int x, int y){
+	for(auto i = entityList.begin(); i != entityList.end(); ++i){
+		if((*i)->colliding(x, y))
+			return *i;
+	}
+	return nullptr;
+}
+
 void Game::run(){
 	
 	Renderer renderer(HSIZE, VSIZE, "Ludum Dare 34");
@@ -38,10 +47,11 @@ void Game::run(){
 	InputHandler* input = InputHandler::getInstance();
 	Player player(&renderer);
 	entityList.push_back(&player);
+	entityList.push_back(new Enemy(&renderer, 100, 100));
 
-	input->registerKey(SDLK_s, &player);
-	input->registerKey(SDLK_l, &player);
-	input->registerKey(SDLK_d, &player);
+	input->registerKey(SDLK_UP, &player);
+	input->registerKey(SDLK_DOWN, &player);
+	input->registerKey(SDLK_w, &player);	
 
 	bool running = true;
 	unsigned long lastFrame = 0;
@@ -57,21 +67,26 @@ void Game::run(){
 		for(auto i = entityList.begin(); i != entityList.end(); ++i){
 			(*i)->update();
 		}
-		for(auto i = entityList.begin(); i != entityList.end(); ++i){
-			(*i)->render();
-		}
 
 		entityList.insert(entityList.end(), toAddList.begin(), toAddList.end());
 		toAddList.clear();
 
+		// very bad method! but works...
 		for(auto d = toDelList.begin(); d != toDelList.end(); ++d){
 			for(auto i = entityList.begin(); i != entityList.end(); i++){
 				if(*i == *d){
+					delete(*i);
 					entityList.erase(i);
 					break;
 				}
 			}
 		}
+		toDelList.clear();
+
+		for(auto i = entityList.begin(); i != entityList.end(); ++i){
+			(*i)->render();
+		}
+		
 		renderer.update();
 	}
 

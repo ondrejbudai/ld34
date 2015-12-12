@@ -12,6 +12,7 @@ int main(int argc, char* argv[]){
 
 	Game *g = Game::createInstance();
 
+
 	g->run();
 
 	return 0;

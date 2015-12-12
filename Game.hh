@@ -20,6 +20,7 @@ class Game {
 		void run();
 		void addEntity(Entity *e);
 		void removeEntity(Entity *e);
+		Entity* getColliding(int x, int y);
 		
 };
 

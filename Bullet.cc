@@ -1,5 +1,6 @@
 #include "Bullet.hh"
 #include "Game.hh"
+#include "global.hh"
 
 Bullet::Bullet(Renderer* renderer_, int x_, int y_){
 	renderer = renderer_;
@@ -9,9 +10,16 @@ Bullet::Bullet(Renderer* renderer_, int x_, int y_){
 }
 
 void Bullet::update(){
-	y -= 20;	
-	if(y < 0)
-		Game::getInstance()->removeEntity(this);
+	x += 20;	
+	Game *g = Game::getInstance();
+	if(x > HSIZE)
+		g->removeEntity(this);
+
+	Entity *e = g->getColliding(x, y);
+	if(e == nullptr)
+		return;
+	g->removeEntity(this);
+
 }
 
 void Bullet::render(){

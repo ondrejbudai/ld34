@@ -39,7 +39,7 @@ void Texture::render(int x, int y, int w_, int h_){
 	static SDL_Rect dest;
 
 	dest.x = x - w_ / 2;
-	dest.y = y - h_;
+	dest.y = y - h_ / 2;
 	dest.w = w_;
 	dest.h = h_;
 

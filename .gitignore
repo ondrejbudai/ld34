@@ -7,4 +7,4 @@ timelapse
 videocast
 .fuse*
 nohup.out
-
+*.sublime*

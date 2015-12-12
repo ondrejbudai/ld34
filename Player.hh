@@ -15,7 +15,7 @@ class Player : public Listener, public Entity {
 		bool shooting = false;
 	public:
 		Player(Renderer* r);
-		~Player(){}
+		~Player(){delete texture;}
 		void event(SDL_Event *e);
 		void update();
 		void render();
