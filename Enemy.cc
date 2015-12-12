@@ -2,8 +2,6 @@
 #include "Game.hh"
 #include "Bullet.hh"
 
-#include <SDL2/SDL.h>
-
 Enemy::Enemy(Renderer *renderer_, int x_, int y_, int vx_, int vy_){
 	renderer = renderer_;
 	x = x_;
@@ -16,8 +14,24 @@ Enemy::Enemy(Renderer *renderer_, int x_, int y_, int vx_, int vy_){
 void Enemy::update(){
 	x += vx;
 	y += vy;
+
+	if(x < 0){
+		Game::getInstance()->removeEntity(this);
+		return;
+	}
+
 	if(cooldown == 0){
-		Game::getInstance()->addEntity(new Bullet(renderer, x - 50, y, -10, 0, isEnemy()));
+		Game* g = Game::getInstance();
+		Player *p = g->getPlayer();
+		int dx = p->getX() - x;
+		int dy = p->getY() - y;
+
+		float magnitude = dx * dx + dy * dy;
+
+		dx = dx / sqrt(magnitude) * 10;
+		dy = dy / sqrt(magnitude) * 10;
+
+		g->addEntity(new Bullet(renderer, x - 50, y, dx, dy, isEnemy()));
 		cooldown = 30;
 	}
 	cooldown--;

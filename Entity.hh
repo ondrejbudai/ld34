@@ -17,6 +17,8 @@ class Entity {
 			{return x_ > x - texture->getWidth() / 2 && x_ < x + texture->getWidth() / 2 && y_ > y - texture->getHeight() / 2  && y_ < y + texture->getHeight() / 2;}
 		virtual void damage(int amount){(void)amount;}
 		virtual bool isEnemy(){return true;}
+		int getX(){return x;}
+		int getY(){return y;}
 };
 
 #endif

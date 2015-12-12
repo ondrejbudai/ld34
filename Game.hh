@@ -26,6 +26,7 @@ class Game {
 		void addEntity(Entity *e);
 		void removeEntity(Entity *e);
 		Entity* getColliding(Entity *e, int x, int y);
+		Player* getPlayer(){return player;}
 		
 };
 

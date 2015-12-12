@@ -22,7 +22,7 @@ class Player : public Listener, public Entity {
 		void render();
 		void damage(int amount);
 		bool isEnemy(){return false;}
-
+		int getHealth(){return health;}
 };
 
 #endif
