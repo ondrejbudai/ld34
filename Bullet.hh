@@ -9,9 +9,10 @@ class Bullet : public Entity {
 	private:
 		Renderer* renderer;
 		Texture* texture;
-		int x, y;
+		int x, y, vx, vy;
+		bool isEnemy;
 	public:
-		Bullet(Renderer *Renderer_, int x_, int y_);
+		Bullet(Renderer *Renderer_, int x_, int y_, int vx_, int vy_, bool isEnemy);
 		~Bullet(){delete texture;}
 		void update();
 		void render();

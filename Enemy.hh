@@ -10,11 +10,17 @@ class Enemy : public Entity {
 		Renderer* renderer;
 		Texture* texture;
 		int x, y;
+		const int maxHealth = 500;
+		int health = maxHealth;
+		unsigned cooldown = 0; 
 	public:
 		Enemy(Renderer* renderer_, int x, int y);
 		~Enemy(){}
+		void update();
 		void render();
 		bool colliding(int x, int y);
+		void damage(int amount);
+		bool isEnemy(){return true;}
 };
 
 #endif

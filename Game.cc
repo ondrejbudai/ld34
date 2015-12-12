@@ -38,7 +38,7 @@ Entity* Game::getColliding(int x, int y){
 
 void Game::run(){
 	
-	Renderer renderer(HSIZE, VSIZE, "Ludum Dare 34");
+	Renderer renderer(WINDOW_W, WINDOW_H, "Ludum Dare 34");
 	if(!renderer.isOk()){
 		std::cout << "Ending program" << std::endl;
 		return;
@@ -47,7 +47,7 @@ void Game::run(){
 	InputHandler* input = InputHandler::getInstance();
 	Player player(&renderer);
 	entityList.push_back(&player);
-	entityList.push_back(new Enemy(&renderer, 100, 100));
+	entityList.push_back(new Enemy(&renderer, 800, 100));
 
 	input->registerKey(SDLK_UP, &player);
 	input->registerKey(SDLK_DOWN, &player);

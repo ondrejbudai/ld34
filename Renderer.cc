@@ -110,3 +110,9 @@ void Renderer::renderText(const char* text, TTF_Font* font, SDL_Color color, int
 
 	delete tex;
 }
+
+void Renderer::renderRect(int x, int y, int w, int h, SDL_Color col){
+	SDL_SetRenderDrawColor(renderer, col.r, col.g, col.b, col.a);
+	SDL_Rect rect = {x, y, w, h};
+	SDL_RenderFillRect(renderer, &rect);
+}
