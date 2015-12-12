@@ -2,8 +2,8 @@
 #define GLOBAL_HH
 
 const int GAME_W = 1000;
-const int GAME_H = 600;
+const int GAME_H = 500;
 const int WINDOW_W = 1000;
-const int WINDOW_H = 650;
+const int WINDOW_H = GAME_H + 50;
 
 #endif

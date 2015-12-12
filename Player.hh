@@ -8,10 +8,6 @@
 
 class Player : public Listener, public Entity {
 	private:
-		Renderer* renderer;
-		Texture* texture;
-		int x, y;
-		int xv, yv;
 		unsigned cooldown = 0;
 		bool shooting = false;
 		int maxHealth = 1000;
@@ -26,7 +22,6 @@ class Player : public Listener, public Entity {
 		void render();
 		void damage(int amount);
 		bool isEnemy(){return false;}
-		bool colliding(int x_, int y_);
 
 };
 

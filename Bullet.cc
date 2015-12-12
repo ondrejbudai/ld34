@@ -19,16 +19,11 @@ void Bullet::update(){
 	if(x > GAME_W || x < 0 || y > GAME_H || y < 0)
 		g->removeEntity(this);
 
-	Entity *e = g->getColliding(x, y);
+	Entity *e = g->getColliding(this, x, y);
 	if(e == nullptr)
 		return;
 	g->removeEntity(this);
 	if(e->isEnemy() == isEnemy)
 		return;
 	e->damage(100);
-
-}
-
-void Bullet::render(){
-	texture->render(x, y);
 }

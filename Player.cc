@@ -7,10 +7,10 @@
 Player::Player(Renderer* renderer_){
 	renderer = renderer_;
 	texture = Texture::createFromFile("./img/player.png", renderer);
-	x = texture->getWidth() / 2;
+	x = texture->getWidth() / 2 + 50;
 	y = GAME_H / 2 + texture->getHeight() / 2;
-	xv = 0;
-	yv = 0;
+	vx = 0;
+	vy = 0;
 }
 
 void Player::event(SDL_Event *e){
@@ -18,15 +18,15 @@ void Player::event(SDL_Event *e){
 	switch(e->key.keysym.sym){
 		case SDLK_UP:
 			if(e->key.type == SDL_KEYDOWN)
-				yv -= 5;
+				vy -= 8;
 			else
-				yv += 5;
+				vy += 8;
 			break;
 	 	case SDLK_DOWN:
 			if(e->key.type == SDL_KEYDOWN)
-				yv += 5;
+				vy += 8;
 			else
-				yv -= 5;
+				vy -= 8;
 			break;
 		case SDLK_w:
 			if(e->key.type == SDL_KEYDOWN){
@@ -40,7 +40,7 @@ void Player::event(SDL_Event *e){
 }
 
 void Player::update(){
-	y += yv;
+	y += vy;
 	if(y < texture->getHeight() / 2)
 		y = texture->getHeight() / 2;
 	else if(y > GAME_H - texture->getHeight() / 2)
@@ -77,8 +77,4 @@ void Player::damage(int amount){
 			health = maxHealth;
 		}
 	}
-}
-
-bool Player::colliding(int x_, int y_){
-	return x_ > x - texture->getWidth() / 2 && x_ < x + texture->getWidth() / 2 && y_ > y - texture->getHeight() / 2  && y_ < y + texture->getHeight() / 2;
 }
