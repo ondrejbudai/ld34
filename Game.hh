@@ -1,32 +1,31 @@
 #ifndef GAME_HH
 #define GAME_HH
 
+#include <vector>
+#include "GameState.hh"
 #include "Entity.hh"
 #include "Renderer.hh"
 #include "Player.hh"
-#include <vector>
 
-class Game {
+class Game : public GameState {
+
 	private:
-		Game();
-
 		std::vector<Entity *> entityList;
 		std::vector<Entity *> toAddList;
 		std::vector<Entity *> toDelList;
 		Renderer* renderer;
 		Player* player;
-
-		static Game* instance;
 		void updateLevel(unsigned ticks);
+		static Game* instance;
 	public:
-		static Game* createInstance();
-		static Game* getInstance();
-		~Game();
-		void run();
+		Game(Renderer* renderer_);
+		~Game(){}
+		GameState* run();
 		void addEntity(Entity *e);
 		void removeEntity(Entity *e);
 		Entity* getColliding(Entity *e, int x, int y);
 		Player* getPlayer(){return player;}
+		static Game* getInstance(){return Game::instance;}
 		
 };
 

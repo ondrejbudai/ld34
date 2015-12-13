@@ -13,16 +13,9 @@
 
 Game* Game::instance;
 
-Game* Game::createInstance(){
-	Game::instance = new Game();
-	return Game::instance;
-}
-
-Game* Game::getInstance(){
-	return Game::instance;
-}
-
-Game::Game(){
+Game::Game(Renderer* renderer_){
+	renderer = renderer_;
+	Game::instance = this;
 }
 
 void Game::addEntity(Entity *e){
@@ -50,15 +43,7 @@ void Game::updateLevel(unsigned ticks){
 	}
 }
 
-void Game::run(){
-	
-	renderer = new Renderer(WINDOW_W, WINDOW_H, "Ludum Dare 34");
-	if(!renderer->isOk()){
-		std::cout << "Ending program" << std::endl;
-		return;
-	}
-
-	srand(time(NULL));
+GameState* Game::run(){
 
 	InputHandler* input = new InputHandler();
 	player = new Player(renderer);
@@ -69,7 +54,7 @@ void Game::run(){
 	input->registerKey(SDLK_w, player);	
 
 	bool running = true;
-	unsigned long lastFrame = 0;
+	unsigned long lastFrame = SDL_GetTicks();
 	unsigned ticks = 0;
 	while(running){
 		if(lastFrame + 1000 / 60 > SDL_GetTicks()){
@@ -115,6 +100,5 @@ void Game::run(){
 		ticks++;
 	}
 
-
+	return NULL;
 }
-

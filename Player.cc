@@ -9,8 +9,6 @@ Player::Player(Renderer* renderer_){
 	texture = Texture::createFromFile("./img/player.png", renderer);
 	x = texture->getWidth() / 2 + 50;
 	y = GAME_H / 2 + texture->getHeight() / 2;
-
-	shieldTex = Texture::createFromFile("img/shield.png", renderer);
 	vx = 0;
 	vy = 0;
 }
@@ -20,15 +18,15 @@ void Player::event(SDL_Event *e){
 	switch(e->key.keysym.sym){
 		case SDLK_UP:
 			if(e->key.type == SDL_KEYDOWN)
-				vy -= 8;
+				up = true;
 			else
-				vy += 8;
+				up = false;
 			break;
 	 	case SDLK_DOWN:
 			if(e->key.type == SDL_KEYDOWN)
-				vy += 8;
+				down = true;
 			else
-				vy -= 8;
+				down = false;
 			break;
 		case SDLK_w:
 			if(e->key.type == SDL_KEYDOWN){
@@ -42,6 +40,7 @@ void Player::event(SDL_Event *e){
 }
 
 void Player::update(){
+	vy = (down ? 8 : 0) + (up ? -8 : 0);
 	y += vy;
 	if(y < texture->getHeight() / 2)
 		y = texture->getHeight() / 2;
@@ -65,8 +64,7 @@ void Player::update(){
 void Player::render(unsigned l){
 	if(l != 1) return;
 	texture->render(x, y);
-	SDL_SetTextureAlphaMod(*shieldTex, 127 * (float(shield) / maxShield));
-	shieldTex->render(x, y);
+
 	renderer->renderRect(0, WINDOW_H - 10, WINDOW_W, WINDOW_H, renderer->cLightblue);
 	renderer->renderRect(0, WINDOW_H - 10, ((float) shield / maxShield) * WINDOW_W, WINDOW_H, renderer->cBlue);
 	renderer->renderRect(0, WINDOW_H - 5, WINDOW_W, WINDOW_H, renderer->cRed);
