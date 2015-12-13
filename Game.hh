@@ -6,6 +6,7 @@
 #include "Entity.hh"
 #include "Renderer.hh"
 #include "Player.hh"
+#include "Levels.hh"
 
 class Game : public GameState {
 
@@ -13,14 +14,18 @@ class Game : public GameState {
 		std::vector<Entity *> entityList;
 		std::vector<Entity *> toAddList;
 		std::vector<Entity *> toDelList;
-		Renderer* renderer;
 		Player* player;
+		Level* current = levels;
+		unsigned ticks = 0;
+
+
 		void updateLevel(unsigned ticks);
 		static Game* instance;
 	public:
 		Game(Renderer* renderer_);
 		~Game(){}
-		GameState* run();
+		GameState* update();
+		void render();
 		void addEntity(Entity *e);
 		void removeEntity(Entity *e);
 		Entity* getColliding(Entity *e, int x, int y);

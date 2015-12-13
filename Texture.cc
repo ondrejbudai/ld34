@@ -47,6 +47,16 @@ void Texture::renderShaded(int x, int y, int w_, int h_, int r, int g, int b){
 	SDL_SetTextureColorMod(texture, 255, 255, 255);
 }
 
+void Texture::renderRotated(int x, int y, float angle){
+	static SDL_Rect dest;
+	dest.x = x - w / 2;
+	dest.y = y - h / 2;
+	dest.w = w;
+	dest.h = h;
+
+	SDL_RenderCopyEx(*renderer, texture, NULL, &dest, angle, NULL, SDL_FLIP_NONE);
+}
+
 
 Texture::~Texture(){
 	SDL_DestroyTexture(texture);

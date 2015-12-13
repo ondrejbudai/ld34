@@ -23,11 +23,29 @@ int main(int argc, char* argv[]){
 
 	GameState* gs = new Menu(renderer);
 
+	unsigned lastFrame = SDL_GetTicks();
 	while(gs != NULL){
-		gs = gs->run();
+
+
+		if(lastFrame + 1000 / 60 > SDL_GetTicks()){
+			SDL_Delay(1);
+			continue;
+		}
+
+		lastFrame += 1000 / 60;
+		GameState* tmp;
+		tmp = gs->update();
+		renderer->clear();
+		gs->render();
+		renderer->update();
+
+		if(gs != tmp)
+			delete gs;
+
+		gs = tmp;
 	}
 
-	delete(renderer);
+	delete renderer;
 
 	return 0;
 }

@@ -77,7 +77,7 @@ void Player::damage(int amount){
 		health += shield;
 		shield = 0;
 		if(health <= 0){
-			health = maxHealth;
+			health = 0;
 		}
 	}
 }

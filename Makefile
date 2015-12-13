@@ -1,4 +1,4 @@
-SOURCES := main.cc Renderer.cc Texture.cc InputHandler.cc Player.cc Bullet.cc Game.cc Enemy.cc Star.cc Entity.cc Menu.cc
+SOURCES := main.cc Renderer.cc Texture.cc InputHandler.cc Player.cc Bullet.cc Game.cc Enemy.cc Star.cc Entity.cc Menu.cc Levels.cc
 HEADERS := $(wildcard *.hh)
 OBJECTS := $(addprefix obj/,$(SOURCES:.cc=.o))
 EXECUTABLE := ld34

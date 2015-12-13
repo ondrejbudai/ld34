@@ -25,7 +25,7 @@ Renderer::Renderer(int width_, int height_, const char *windowName){
 		return;
 	}
 
-	window = SDL_CreateWindow(windowName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+	window = SDL_CreateWindow(windowName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
 	if(window == NULL){
 		cerr << "SDL_Window could not initialize! SDL_Error: " << SDL_GetError() << endl;
 		ok = false;
