@@ -23,15 +23,6 @@ Texture::Texture(SDL_Surface* from, const Renderer* renderer_){
 	ok = true;
 }
 
-Texture::Texture(const char* filename, const Renderer* renderer_){
-	renderer = renderer_;
-	ok = false;
-	texture = IMG_LoadTexture(*renderer, filename);
-	SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
-	if(texture != nullptr)
-		ok = true;
-}
-
 void Texture::render(int x, int y){
 	render(x, y, w, h);
 }
@@ -46,7 +37,7 @@ void Texture::render(int x, int y, int w_, int h_){
 	SDL_RenderCopy(*renderer, texture, NULL, &dest);
 }
 
-void Texture::renderScaled(int x, int y, double scale){
+void Texture::renderScaled(int x, int y, float scale){
 	render(x, y, w * scale, h * scale);
 }
 

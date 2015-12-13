@@ -10,6 +10,7 @@ Bullet::Bullet(Renderer* renderer_, int x_, int y_, int vx_, int vy_, bool isEne
 	vy = vy_;
 	isEnemy = isEnemy_;
 	texture = Texture::createFromFile("img/bullet.png", renderer);
+	level = 1;
 }
 
 void Bullet::update(){
@@ -25,5 +26,5 @@ void Bullet::update(){
 	g->removeEntity(this);
 	if(e->isEnemy() == isEnemy)
 		return;
-	e->damage(100);
+	e->damage(200);
 }

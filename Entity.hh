@@ -9,26 +9,19 @@ class Entity {
 		int vx = 0, vy = 0;
 		Texture* texture = nullptr;
 		Renderer* renderer = nullptr;
+		unsigned level = 0;
 	public:
-		virtual void update(){x += vx; y += vy;}
-		virtual void render(){if(texture) texture->render(x, y);}
+		virtual void update();
+		virtual void render(unsigned l){if(texture && level == l) texture->render(x, y);}
 		virtual ~Entity(){}
-		virtual bool colliding(int x_, int y_)
-			{return x_ > x - texture->getWidth() / 2 && x_ < x + texture->getWidth() / 2 && y_ > y - texture->getHeight() / 2  && y_ < y + texture->getHeight() / 2;}
+		virtual bool colliding(int x_, int y_);
+		virtual bool colliding(Entity *e);
 		virtual void damage(int amount){(void)amount;}
 		virtual bool isEnemy(){return true;}
 		int getX(){return x;}
 		int getY(){return y;}
 		int getW(){return texture->getWidth();}
 		int getH(){return texture->getHeight();}
-		virtual bool colliding(Entity *e){
-			return !(
-				x + texture->getWidth() < e->getX() ||
-				e->getX() + e->getW() < x ||
-				y + texture->getHeight() < e->getY() ||
-				e->getY() + e->getH() < y
-				);
-		}
 };
 
 #endif

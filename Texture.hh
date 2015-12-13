@@ -11,11 +11,10 @@ private:
 	int w, h;
 	const Renderer* renderer;
 public:
-	Texture(const char* filename, const Renderer* renderer_);
 	~Texture();
 	void render(int x, int y);
 	void render(int x, int y, int w, int h);
-	void renderScaled(int x, int y, double scale);
+	void renderScaled(int x, int y, float scale);
 	void renderShaded(int x, int y, int w_, int h_, int r, int g, int b);
 
 	static Texture* createFromFile(const char* filename, const Renderer* renderer_);

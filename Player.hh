@@ -14,12 +14,13 @@ class Player : public Listener, public Entity {
 		int health = maxHealth;
 		int maxShield = 1000;
 		int shield = maxShield;
+		Texture *shieldTex;
 	public:
 		Player(Renderer* r);
 		~Player(){delete texture;}
 		void event(SDL_Event *e);
 		void update();
-		void render();
+		void render(unsigned l);
 		void damage(int amount);
 		bool isEnemy(){return false;}
 		int getHealth(){return health;}

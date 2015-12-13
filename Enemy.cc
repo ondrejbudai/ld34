@@ -42,16 +42,20 @@ void Enemy::update(){
 		dx = dx / sqrt(magnitude) * 10;
 		dy = dy / sqrt(magnitude) * 10;
 
-		//g->addEntity(new Bullet(renderer, x - 50, y, dx, dy, isEnemy()));
-		cooldown = 30;
+		g->addEntity(new Bullet(renderer, x - 50, y, dx, dy, isEnemy()));
+		cooldown = 50;
 	}
 	cooldown--;
 }
 
-void Enemy::render(){
+void Enemy::render(unsigned l){
+	const static SDL_Color cRed = {255, 0, 0, 127};
+	const static SDL_Color cGreen = {0, 255, 0, 127};
+	if(l != 1) return;
 	texture->render(x, y);
-	renderer->renderRect(x - texture->getWidth() / 2, y + texture->getHeight() / 2, texture->getWidth(), 5, renderer->cRed);
-	renderer->renderRect(x - texture->getWidth() / 2, y + texture->getHeight() / 2, ((float)health / maxHealth)* texture->getWidth(), 5, renderer->cGreen);
+	if(health == maxHealth) return;
+	renderer->renderRect(x - texture->getWidth() / 2, y + texture->getHeight() / 2, texture->getWidth(), 5, cRed);
+	renderer->renderRect(x - texture->getWidth() / 2, y + texture->getHeight() / 2, ((float)health / maxHealth)* texture->getWidth(), 5, cGreen);
 }
 
 void Enemy::damage(int amount){

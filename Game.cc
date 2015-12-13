@@ -1,3 +1,7 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+
 #include "Game.hh"
 #include "Player.hh"
 #include "global.hh"
@@ -5,7 +9,7 @@
 #include "InputHandler.hh"
 #include "Enemy.hh"
 #include "Levels.hh"
-#include <iostream>
+#include "Star.hh"
 
 Game* Game::instance;
 
@@ -54,9 +58,11 @@ void Game::run(){
 		return;
 	}
 
+	srand(time(NULL));
+
 	InputHandler* input = new InputHandler();
 	player = new Player(renderer);
-	entityList.push_back(player);
+	addEntity(player);
 
 	input->registerKey(SDLK_UP, player);
 	input->registerKey(SDLK_DOWN, player);
@@ -74,11 +80,16 @@ void Game::run(){
 		running = input->update();
 		renderer->clear();
 
-		updateLevel(ticks);
 		
 		for(auto i = entityList.begin(); i != entityList.end(); ++i){
 			(*i)->update();
 		}
+
+		if(rand() % 15 == 0){
+			addEntity(new Star(renderer, GAME_W - 1, rand() % GAME_H, (rand() % 255 / 255.0f) * 0.75f + 0.25f, rand() % 191));
+		}
+
+		updateLevel(ticks);
 
 		entityList.insert(entityList.end(), toAddList.begin(), toAddList.end());
 		toAddList.clear();
@@ -94,9 +105,10 @@ void Game::run(){
 			}
 		}
 		toDelList.clear();
-
-		for(auto i = entityList.begin(); i != entityList.end(); ++i){
-			(*i)->render();
+		for(unsigned l = 0; l < 2; l++){
+			for(auto i = entityList.begin(); i != entityList.end(); ++i){
+				(*i)->render(l);
+			}
 		}
 		
 		renderer->update();
