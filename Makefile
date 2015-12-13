@@ -31,9 +31,10 @@ clean:
 	rm -rf $(EXECUTABLE) 2>/dev/null || true
 
 zip: all
+	ln -s . SpacePilot/
 	rm SpacePilot.zip 2>/dev/null || true
 ifeq ($(target),windows)
-	zip SpacePilot.zip spacepilot* img/*.png SDL2.dll SDL2_image.dll SDL2_ttf.dll libfreetype-6.dll zlib1.dll libpng16-16.dll
+	zip SpacePilot.zip SpacePilot/spacepilot* SpacePilot/img/*.png SpacePilot/SDL2.dll SpacePilot/SDL2_image.dll SpacePilot/SDL2_ttf.dll SpacePilot/libfreetype-6.dll SpacePilot/zlib1.dll SpacePilot/libpng16-16.dll
 else
-	zip SpacePilot.zip spacepilot* img/*.png
+	zip SpacePilot.zip SpacePilot/spacepilot* SpacePilot/img/*.png
 endif
