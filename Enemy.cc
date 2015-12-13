@@ -17,6 +17,10 @@ void Enemy::update(){
 	x += vx;
 	y += vy;
 
+	if(y <= 0 || y >= GAME_H){
+		vy = -vy;
+	}
+
 	Game* g = Game::getInstance();
 
 	if(x < 0){

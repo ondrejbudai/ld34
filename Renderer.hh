@@ -34,6 +34,7 @@ enum Align {RIGHT, LEFT};
 	const SDL_Color cGreen = {0, 255, 0, 255};
 	const SDL_Color cBlue = {0, 0, 255, 255};
 	const SDL_Color cLightblue = {0, 0, 63, 255};
+	const SDL_Color cYellow = {255, 255, 0, 255};
 };
 
 #endif

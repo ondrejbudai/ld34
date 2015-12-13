@@ -44,7 +44,11 @@ Entity* Game::getColliding(Entity *e, int x, int y){
 }
 
 void Game::updateLevel(unsigned ticks){
-	while(current->start == ticks){
+	while(current->start <= ticks){
+		if(current->start < ticks){
+			current++;
+			continue;
+		}
 		if(current->enemyType == E_END) close = true;
 		addEntity(new Enemy(renderer, GAME_W + current->x, GAME_H / 2 + current->y, current->vx, current->vy));
 		current++;

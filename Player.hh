@@ -9,10 +9,10 @@
 class Player : public Listener, public Entity {
 	private:
 		unsigned cooldown = 0;
-		bool shooting = false, up = false, down = false;
+		bool up = false, down = false;
 		int maxHealth = 1000;
 		int health = maxHealth;
-		int maxShield = 1000;
+		int maxShield = 500;
 		int shield = maxShield;
 	public:
 		Player(Renderer* r);

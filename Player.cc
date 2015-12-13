@@ -28,12 +28,6 @@ void Player::event(SDL_Event *e){
 			else
 				down = false;
 			break;
-		case SDLK_w:
-			if(e->key.type == SDL_KEYDOWN){
-				shooting = true;
-			} else
-				shooting = false;
-			break;
 		default:
 			break;
 	}
@@ -47,7 +41,7 @@ void Player::update(){
 	else if(y > GAME_H - texture->getHeight() / 2)
 		y = GAME_H - texture->getHeight() / 2;
 
-	if(shooting && cooldown == 0){
+	if(cooldown == 0){
 		Game *g = Game::getInstance();
 		g->addEntity(new Bullet(renderer, x + texture->getWidth() / 2, y - 28, 20, 0, isEnemy()));
 		g->addEntity(new Bullet(renderer, x + texture->getWidth() / 2, y + 28, 20, 0, isEnemy()));
@@ -58,15 +52,15 @@ void Player::update(){
 		cooldown--;
 
 	if(shield < maxShield)
-		shield++;
+		shield += 2;
 }
 
 void Player::render(unsigned l){
 	if(l != 1) return;
 	texture->render(x, y);
 
-	renderer->renderRect(0, WINDOW_H - 10, WINDOW_W, WINDOW_H, renderer->cLightblue);
-	renderer->renderRect(0, WINDOW_H - 10, ((float) shield / maxShield) * WINDOW_W, WINDOW_H, renderer->cBlue);
+	renderer->renderRect(0, WINDOW_H - 10, WINDOW_W, WINDOW_H, renderer->cBlue);
+	renderer->renderRect(0, WINDOW_H - 10, ((float) shield / maxShield) * WINDOW_W, WINDOW_H, renderer->cYellow);
 	renderer->renderRect(0, WINDOW_H - 5, WINDOW_W, WINDOW_H, renderer->cRed);
 	renderer->renderRect(0, WINDOW_H - 5, ((float) health / maxHealth) * WINDOW_W, WINDOW_H, renderer->cGreen);
 }

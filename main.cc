@@ -27,12 +27,12 @@ int main(int argc, char* argv[]){
 	while(gs != NULL){
 
 
-		if(lastFrame + 1000 / 60 > SDL_GetTicks()){
+		if(lastFrame + 1000 > SDL_GetTicks() * 60){
 			SDL_Delay(1);
 			continue;
 		}
 
-		lastFrame += 1000 / 60;
+		lastFrame += 1000;
 		GameState* tmp;
 		tmp = gs->update();
 		renderer->clear();

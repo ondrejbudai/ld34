@@ -7,7 +7,7 @@
 
 class Enemy : public Entity {
 	private:
-		const int maxHealth = 750;
+		const int maxHealth = 1000;
 		int health = maxHealth;
 		unsigned cooldown = 0; 
 	public:
