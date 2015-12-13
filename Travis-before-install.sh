@@ -16,7 +16,7 @@ case "$os" in
     sudo i386 chroot "$chroot" add-apt-repository -y ppa:zoogie/sdl2-snapshots
     sudo i386 chroot "$chroot" add-apt-repository -y ppa:ubuntu-toolchain-r/test
     sudo i386 chroot "$chroot" apt-get update -qq
-    sudo i386 chroot "$chroot" apt-get install -qq libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev g++-4.8 build-essential
+    sudo i386 chroot "$chroot" apt-get install -qq libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev g++-4.8 build-essential zip
 
     ;;
   linux64)
