@@ -10,14 +10,12 @@ using std::map;
 
 class InputHandler {
 private:
-	static InputHandler* instance;
-	InputHandler();
 	
 	map<SDL_Keycode,Listener *> keyListeners;
 	Listener* resizeListener;
 
 public:
-	static InputHandler* getInstance();
+	InputHandler();
 	bool update();
 
 	void registerKey(SDL_Keycode keycode, Listener* listener) {keyListeners[keycode] = listener;}

@@ -54,7 +54,7 @@ void Game::run(){
 		return;
 	}
 
-	InputHandler* input = InputHandler::getInstance();
+	InputHandler* input = new InputHandler();
 	player = new Player(renderer);
 	entityList.push_back(player);
 

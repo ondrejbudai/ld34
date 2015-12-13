@@ -2,17 +2,7 @@
 
 #include "InputHandler.hh"
 
-InputHandler* InputHandler::instance = NULL;
-
-
 InputHandler::InputHandler(){
-}
-
-InputHandler* InputHandler::getInstance(){
-	if(instance == nullptr){
-		instance = new InputHandler();
-	}
-	return instance;
 }
 
 bool InputHandler::update(){
