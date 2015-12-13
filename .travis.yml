@@ -1,10 +1,14 @@
 language: cpp
 sudo: true
 env:
-    - os="linux64"
-    - os="linux32"
-    - os="win32"
+  matrix:
+  - os="linux64"
+  - os="linux32"
+  - os="win32"
+  global:
+    secure: PFEXIkVuAhCCzxe47kfz2X3EkmKy2OOfYdnZFye7CYFkBA3ZPw8Rb7Y5UgLclzJZZxm0rzQW2P+1/UoS4W6K96Su62185JFyuh1E441rEVwU9QKo+yHxxZvMDGvvT3a7wySma8VtH7uCVoQ7lJJaY4jPGn39z7nvRVcYA3VdJh0/7uiEefvsizWAYiE2edP+IHbkjWE5pNXAH5v7THJmAlOkpXbdJafEnrQHHEw/lLkiLRNtIgEDcIyEwZan5Og7rDnzPnER27mnjdSNhE5hFFBe/3ZTtv+LK0t2Ukt/oJxEwk4Qr2KXhFM+FK2XafWkDqQbNoIYlT8WTfkVmL/faC9T1eZ5EwttvNdF6hC7vk8ENhDRZ6IOJpW3S50zZNfbsplZ2t7OMiplrCoM8Kw65nBAWpxa+PVeBjPl22tmd5p312wfpjp83tnJPXNJAUk0kD0ZY/nM9zJ3fgeq+xwOFhkO0khRV7ruTV1+jcxXLK75TTk83MXjrGDK4gkemGa86EpJArePgNgNwBCC/6qvIJRfH0X+f9ckeRtK+GSjUVyG6gj69NaIipp5AB9ykuqXH51LDykURJReL0trtn3OChm7eZrXb76TwbBL6UC82094cwv6f8qJPOLBPGuyeD9pGLl3t2DMi8T7ipGXPBhK5+kzg1pBr406pcASYdGL+as=
 before_install:
-    - "./Travis-before-install.sh $os"
+- "./Travis-before-install.sh $os"
 script:
-    - "./Travis-script.sh $os"
+- "./Travis-script.sh $os"
+- "./Travis-deploy.sh $os"

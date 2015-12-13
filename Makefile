@@ -26,9 +26,9 @@ $(OBJECTS): obj/%.o : %.cc $(HEADERS)
 	$(CXX) $(CFLAGS) $< -o $@
 
 clean:
-	rm -rf obj
-	rm -rf $(EXECUTABLE)
+	rm -rf obj 2>/dev/null || true
+	rm -rf $(EXECUTABLE) 2>/dev/null || true
 
-
-# falešné cíle
-.PHONY:
+zip: all
+	rm SpacePilot.zip 2>/dev/null || true
+	zip SpacePilot.zip spacepilot* img/*.png

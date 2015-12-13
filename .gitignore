@@ -7,3 +7,4 @@ videocast
 .fuse*
 nohup.out
 *.sublime*
+*.zip
