@@ -17,7 +17,7 @@ class Entity {
 		virtual bool colliding(int x_, int y_);
 		virtual bool colliding(Entity *e);
 		virtual void damage(int amount){(void)amount;}
-		virtual bool isEnemy(){return true;}
+		virtual bool isEnemy(){return false;}
 		int getX(){return x;}
 		int getY(){return y;}
 		int getW(){return texture->getWidth();}

@@ -5,6 +5,7 @@
 
 typedef enum {
 	E_NORMAL,
+	E_END
 } EnemyType;
 
 typedef struct {

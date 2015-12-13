@@ -22,7 +22,7 @@ static Level ilevels[] = {
 {340, E_NORMAL, 50, -150, -SCROLL_SPEED, 0},
 {340, E_NORMAL, 50, 150, -SCROLL_SPEED, 0},
 
-{0, E_NORMAL, 0, 0, 0, 0}
+{740, E_END, 0, 0, 0, 0},
 };
 
 Level* levels = ilevels;
