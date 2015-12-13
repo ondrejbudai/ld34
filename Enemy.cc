@@ -34,13 +34,14 @@ void Enemy::update(){
 
 	if(cooldown == 0){
 		Player *p = g->getPlayer();
-		int dx = p->getX() - x;
-		int dy = p->getY() - y;
+		float dx = p->getX() - (x - 50);
+		float dy = p->getY() - y;
 
-		float magnitude = dx * dx + dy * dy;
+		float magnitude = sqrt(dx * dx + dy * dy);
 
-		dx = dx / sqrt(magnitude) * 10;
-		dy = dy / sqrt(magnitude) * 10;
+		dx = dx / magnitude * 10;
+		dy = dy / magnitude * 10;
+
 
 		g->addEntity(new Bullet(renderer, x - 50, y, dx, dy, isEnemy()));
 		cooldown = 50;

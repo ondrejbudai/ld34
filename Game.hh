@@ -7,8 +7,9 @@
 #include "Renderer.hh"
 #include "Player.hh"
 #include "Levels.hh"
+#include "Listeners.hh"
 
-class Game : public GameState {
+class Game : public GameState, public Listener {
 
 	private:
 		std::vector<Entity *> entityList;
@@ -17,6 +18,8 @@ class Game : public GameState {
 		Player* player;
 		Level* current = levels;
 		unsigned ticks = 0;
+		bool close = false;
+		Texture* deathTex[2];
 
 
 		void updateLevel(unsigned ticks);
@@ -26,6 +29,9 @@ class Game : public GameState {
 		~Game(){}
 		GameState* update();
 		void render();
+
+		void event(SDL_Event* e);
+
 		void addEntity(Entity *e);
 		void removeEntity(Entity *e);
 		Entity* getColliding(Entity *e, int x, int y);

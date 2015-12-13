@@ -20,6 +20,8 @@ public:
 
 	void registerKey(SDL_Keycode keycode, Listener* listener) {keyListeners[keycode] = listener;}
 	void registerResize(Listener* listener){resizeListener = listener;}
+
+	void clearKeys(){keyListeners.clear();}
 };
 
 #endif

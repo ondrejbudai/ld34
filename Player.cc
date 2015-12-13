@@ -8,7 +8,7 @@ Player::Player(Renderer* renderer_){
 	renderer = renderer_;
 	texture = Texture::createFromFile("./img/player.png", renderer);
 	x = texture->getWidth() / 2 + 50;
-	y = GAME_H / 2 + texture->getHeight() / 2;
+	y = GAME_H / 2;
 	vx = 0;
 	vy = 0;
 }

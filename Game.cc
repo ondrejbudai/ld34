@@ -21,6 +21,9 @@ Game::Game(Renderer* renderer_) : GameState(renderer_){
 	inputHandler->registerKey(SDLK_DOWN, player);
 	inputHandler->registerKey(SDLK_w, player);	
 	Game::instance = this;
+
+	deathTex[0] = Texture::createFromFile("img/deathscreen.png", renderer);
+	deathTex[1] = Texture::createFromFile("img/deathscreen2.png", renderer);
 }
 
 void Game::addEntity(Entity *e){
@@ -50,8 +53,12 @@ void Game::updateLevel(unsigned ticks){
 GameState* Game::update(){
 	if(!inputHandler->update())
 		return NULL;
+	if(close)
+		return new Menu(renderer);
 
-	
+	if(player->getHealth() <= 0)
+		return this;
+
 	for(auto i = entityList.begin(); i != entityList.end(); ++i){
 		(*i)->update();
 	}
@@ -77,8 +84,10 @@ GameState* Game::update(){
 	}
 	toDelList.clear();
 
-	if(player->getHealth() <= 0)
-		return new Menu(renderer);
+	if(player->getHealth() <= 0){
+		inputHandler->clearKeys();
+		inputHandler->registerKey(SDLK_SPACE, this);
+	}
 	
 	ticks++;
 
@@ -86,10 +95,21 @@ GameState* Game::update(){
 }
 
 void Game::render(){
+	static unsigned ticks = 0;
+
 	for(unsigned l = 0; l < 2; l++){
-			for(auto i = entityList.begin(); i != entityList.end(); ++i){
-				(*i)->render(l);
-			}
+		for(auto i = entityList.begin(); i != entityList.end(); ++i){
+			(*i)->render(l);
 		}
-	
+	}
+	if(player->getHealth() <= 0){
+		unsigned offset = (ticks / 10) % 2;
+		deathTex[offset]->render(WINDOW_W / 2, WINDOW_H / 2);
+	}
+	ticks++;
+}
+
+void Game::event(SDL_Event* e){
+	if(e->key.type == SDL_KEYUP) return;
+	close = true;
 }

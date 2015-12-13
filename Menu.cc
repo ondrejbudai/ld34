@@ -36,5 +36,6 @@
 	}
 
 	void Menu::event(SDL_Event *e){
+		if(e->key.type == SDL_KEYUP) return;
 		running = false;
 	}

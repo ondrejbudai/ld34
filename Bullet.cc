@@ -2,7 +2,7 @@
 #include "Game.hh"
 #include "global.hh"
 
-Bullet::Bullet(Renderer* renderer_, int x_, int y_, int vx_, int vy_, bool isEnemy_){
+Bullet::Bullet(Renderer* renderer_, int x_, int y_, float vx_, float vy_, bool isEnemy_){
 	renderer = renderer_;
 	x = x_;
 	y = y_;

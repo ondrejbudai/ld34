@@ -5,8 +5,8 @@
 
 class Entity {
 	protected:
-		int x = 0, y = 0;
-		int vx = 0, vy = 0;
+		float x = 0, y = 0;
+		float vx = 0, vy = 0;
 		Texture* texture = nullptr;
 		Renderer* renderer = nullptr;
 		unsigned level = 0;
