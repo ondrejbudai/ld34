@@ -16,6 +16,7 @@ public:
 	void render(int x, int y, int w, int h);
 	void renderScaled(int x, int y, float scale);
 	void renderShaded(int x, int y, int w_, int h_, int r, int g, int b);
+	void renderShaded(int x, int y, int r, int g, int b);
 	void renderRotated(int x, int y, float angle);
 
 	static Texture* createFromFile(const char* filename, const Renderer* renderer_);

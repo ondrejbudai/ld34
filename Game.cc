@@ -24,6 +24,9 @@ Game::Game(Renderer* renderer_) : GameState(renderer_){
 
 	deathTex[0] = Texture::createFromFile("img/deathscreen.png", renderer);
 	deathTex[1] = Texture::createFromFile("img/deathscreen2.png", renderer);
+
+	victoryTex[0] = Texture::createFromFile("img/victory1.png", renderer);
+	victoryTex[1] = Texture::createFromFile("img/victory2.png", renderer);
 }
 
 void Game::addEntity(Entity *e){
@@ -49,7 +52,11 @@ void Game::updateLevel(unsigned ticks){
 			current++;
 			continue;
 		}
-		if(current->enemyType == E_END) close = true;
+		if(current->enemyType == E_END){
+			victory = 1;
+			inputHandler->clearKeys();
+			inputHandler->registerKey(SDLK_SPACE, this);
+		}
 		addEntity(new Enemy(renderer, GAME_W + current->x, GAME_H / 2 + current->y, current->vx, current->vy));
 		current++;
 	}
@@ -61,7 +68,7 @@ GameState* Game::update(){
 	if(close)
 		return new Menu(renderer);
 
-	if(player->getHealth() <= 0)
+	if(player->getHealth() <= 0 || victory > 0)
 		return this;
 
 	for(auto i = entityList.begin(); i != entityList.end(); ++i){
@@ -107,14 +114,19 @@ void Game::render(){
 			(*i)->render(l);
 		}
 	}
-	if(player->getHealth() <= 0){
+	if(victory > 0){
+		victoryTex[victory - 1]->render(WINDOW_W / 2, WINDOW_H / 2);
+	} else if(player->getHealth() <= 0){
 		unsigned offset = (ticks / 10) % 2;
 		deathTex[offset]->render(WINDOW_W / 2, WINDOW_H / 2);
 	}
+
+
 	ticks++;
 }
 
 void Game::event(SDL_Event* e){
 	if(e->key.type == SDL_KEYUP) return;
-	close = true;
+	if(player->getHealth() <= 0 || victory == 2) close = true;
+	if(victory == 1) victory = 2;
 }

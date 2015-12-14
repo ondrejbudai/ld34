@@ -57,7 +57,9 @@ void Player::update(){
 
 void Player::render(unsigned l){
 	if(l != 1) return;
+
 	texture->render(x, y);
+
 
 	renderer->renderRect(0, WINDOW_H - 10, WINDOW_W, WINDOW_H, renderer->cBlue);
 	renderer->renderRect(0, WINDOW_H - 10, ((float) shield / maxShield) * WINDOW_W, WINDOW_H, renderer->cYellow);

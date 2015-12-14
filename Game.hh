@@ -19,7 +19,9 @@ class Game : public GameState, public Listener {
 		Level* current = levels;
 		unsigned ticks = 0;
 		bool close = false;
+		unsigned victory = 0;
 		Texture* deathTex[2];
+		Texture* victoryTex[2];
 
 
 		void updateLevel(unsigned ticks);
