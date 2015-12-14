@@ -34,7 +34,7 @@ zip: all
 	ln -s . SpacePilot
 	rm SpacePilot.zip 2>/dev/null || true
 ifeq ($(target),windows)
-	zip SpacePilot.zip SpacePilot/spacepilot* SpacePilot/img/*.png SpacePilot/SDL2.dll SpacePilot/SDL2_image.dll SpacePilot/SDL2_ttf.dll SpacePilot/libfreetype-6.dll SpacePilot/zlib1.dll SpacePilot/libpng16-16.dll
+	zip SpacePilot.zip SpacePilot/spacepilot* SpacePilot/img/*.png SpacePilot/SDL2.dll SpacePilot/SDL2_image.dll SpacePilot/SDL2_ttf.dll SpacePilot/libfreetype-6.dll SpacePilot/zlib1.dll SpacePilot/libpng16-16.dll SpacePilor/README SpacePilor/LICENSE
 else
-	zip SpacePilot.zip SpacePilot/spacepilot* SpacePilot/img/*.png
+	zip SpacePilot.zip SpacePilot/spacepilot* SpacePilot/img/*.png SpacePilor/README SpacePilor/LICENSE
 endif

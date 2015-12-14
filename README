@@ -1,0 +1,12 @@
+SPACE PILOT
+
+created for Ludum Dare 34 by Budicze <budi@budai.cz>
+
+Linux:
+
+You need SDL2, SDL2_image and SDL2_ttf libraries!
+Run "chmod +x spacepilot" before first run to set permissions!
+
+Windows:
+
+All required libraries should be bundled.
