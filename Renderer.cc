@@ -69,6 +69,10 @@ Renderer::Renderer(int width_, int height_, const char *windowName){
 }
 
 Renderer::~Renderer(){
+	for(auto i = availableTextures.begin(); i != availableTextures.end(); ++i){
+		if(i->second == nullptr) continue;
+		SDL_DestroyTexture(i->second);
+	}
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 #ifdef ENABLE_TTF
