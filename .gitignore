@@ -8,3 +8,4 @@ videocast
 nohup.out
 *.sublime*
 *.zip
+gmon.out

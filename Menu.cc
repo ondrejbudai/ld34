@@ -4,11 +4,11 @@
 
 	Menu::Menu(Renderer* renderer_) : GameState(renderer_){
 		inputHandler->registerKey(SDLK_SPACE, this);
-		logoTex = Texture::createFromFile("img/logo.png", renderer);
-		playerTex = Texture::createFromFile("img/player.png", renderer);
-		enemyTex = Texture::createFromFile("img/enemy.png", renderer);
-		guideTex[0] = Texture::createFromFile("img/guide.png", renderer);
-		guideTex[1] = Texture::createFromFile("img/guide2.png", renderer);
+		logoTex = new Texture("img/logo.png", renderer);
+		playerTex = new Texture("img/player.png", renderer);
+		enemyTex = new Texture("img/enemy.png", renderer);
+		guideTex[0] = new Texture("img/guide.png", renderer);
+		guideTex[1] = new Texture("img/guide2.png", renderer);
 	}
 
 	GameState* Menu::update(){

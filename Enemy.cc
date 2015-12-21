@@ -10,7 +10,7 @@ Enemy::Enemy(Renderer *renderer_, int x_, int y_, int vx_, int vy_){
 	y = y_;
 	vx = vx_;
 	vy = vy_;
-	texture = Texture::createFromFile("img/enemy.png", renderer);	
+	texture = new Texture("img/enemy.png", renderer);	
 }
 
 void Enemy::update(){

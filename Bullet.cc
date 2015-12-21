@@ -9,7 +9,7 @@ Bullet::Bullet(Renderer* renderer_, int x_, int y_, float vx_, float vy_, bool i
 	vx = vx_;
 	vy = vy_;
 	isEnemy = isEnemy_;
-	texture = Texture::createFromFile("img/bullet.png", renderer);
+	texture = new Texture("img/bullet.png", renderer);
 	level = 2;
 }
 

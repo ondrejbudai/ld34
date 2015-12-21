@@ -16,6 +16,10 @@ endif
 debug: CFLAGS+=-g
 debug: all
 
+profile: CFLAGS+=-pg
+profile: LDFLAGS+=-pg
+profile: debug
+
 all: create_dir $(SOURCES) $(EXECUTABLE)
 
 release: CFLAGS+=-O2

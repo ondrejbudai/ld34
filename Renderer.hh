@@ -2,6 +2,7 @@
 #define RENDERER_H_
 
 #include <SDL2/SDL.h>
+#include <map>
 
 //#define ENABLE_TTF
 
@@ -18,6 +19,8 @@ private:
 	bool ok;
 	int height, width;
 	int xoff = 0, yoff = 0;
+	std::map<std::string, SDL_Texture*> availableTextures;
+
 public:
 enum Align {RIGHT, LEFT};
 	Renderer(int width, int height, const char *windowName);
@@ -35,6 +38,8 @@ enum Align {RIGHT, LEFT};
 	void setOffset(int xoff_, int yoff_){xoff = xoff_; yoff = yoff_;}
 	int getXOffset(){return xoff;}
 	int getYOffset(){return yoff;}
+	SDL_Texture* getTexture(const char* name){return availableTextures[name];}
+	void addTexture(const char* name, SDL_Texture* tex){availableTextures[name] = tex;}
 
 	const SDL_Color cBlack = {0, 0, 0, 255};
 	const SDL_Color cRed = {255, 0, 0, 255};

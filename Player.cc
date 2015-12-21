@@ -6,16 +6,16 @@
 
 Player::Player(Renderer* renderer_){
 	renderer = renderer_;
-	texture = Texture::createFromFile("./img/player.png", renderer);
+	texture = new Texture("./img/player.png", renderer);
 	x = texture->getWidth() / 2 + 50;
 	y = GAME_H / 2;
 	vx = 0;
 	vy = 0;
 
-	healthBar = Texture::createFromFile("img/bar-health.png", renderer);
+	healthBar = new Texture("img/bar-health.png", renderer);
 	healthBar->setAlpha(63);
 
-	shieldBar = Texture::createFromFile("img/bar-shield.png", renderer);
+	shieldBar = new Texture("img/bar-shield.png", renderer);
 	shieldBar->setAlpha(63);
 }
 

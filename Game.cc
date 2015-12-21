@@ -22,11 +22,11 @@ Game::Game(Renderer* renderer_) : GameState(renderer_){
 	inputHandler->registerKey(SDLK_w, player);	
 	Game::instance = this;
 
-	deathTex[0] = Texture::createFromFile("img/deathscreen.png", renderer);
-	deathTex[1] = Texture::createFromFile("img/deathscreen2.png", renderer);
+	deathTex[0] = new Texture("img/deathscreen.png", renderer);
+	deathTex[1] = new Texture("img/deathscreen2.png", renderer);
 
-	victoryTex[0] = Texture::createFromFile("img/victory1.png", renderer);
-	victoryTex[1] = Texture::createFromFile("img/victory2.png", renderer);
+	victoryTex[0] = new Texture("img/victory1.png", renderer);
+	victoryTex[1] = new Texture("img/victory2.png", renderer);
 }
 
 void Game::addEntity(Entity *e){
