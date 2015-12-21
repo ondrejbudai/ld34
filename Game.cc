@@ -56,8 +56,9 @@ void Game::updateLevel(unsigned ticks){
 			victory = 1;
 			inputHandler->clearKeys();
 			inputHandler->registerKey(SDLK_SPACE, this);
+		} else {
+			addEntity(new Enemy(renderer, GAME_W + current->x, GAME_H / 2 + current->y, current->vx, current->vy));
 		}
-		addEntity(new Enemy(renderer, GAME_W + current->x, GAME_H / 2 + current->y, current->vx, current->vy));
 		current++;
 	}
 }
