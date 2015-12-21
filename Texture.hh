@@ -27,10 +27,6 @@ public:
 	void setScale(float scale_){scale = scale_;}
 	void setColorMod(SDL_Color* colormod_){colormod = colormod_;}
 
-#ifdef ENABLE_TTF
-	static Texture* createFromText(const char* filename, SDL_Color color, TTF_Font* font, Renderer* renderer_);
-#endif
-
 	bool isOk(){return ok;}
 	int getWidth(){return w;}
 	int getHeight(){return h;}

@@ -86,26 +86,3 @@ void Texture::renderPart(int x, int y, SDL_Rect* src){
 Texture::~Texture(){
 	// SDL_DestroyTexture(texture);
 }
-
-#ifdef ENABLE_TTF
-Texture* Texture::createFromText(const char* text, SDL_Color color, TTF_Font* font, Renderer* renderer_){
-	using namespace std;
-
-	SDL_Surface* surface = TTF_RenderText_Blended(font, text, color);
-
-	if(surface == NULL){
-		cerr << "Image cannot be loaded: " << IMG_GetError() << endl;
-		return NULL;
-	}
-
-	Texture* tex = new Texture(surface, renderer_);
-
-	SDL_FreeSurface(surface);
-
-	if(!tex->isOk()){
-		cerr << "Cannot create texture from text \"" << text << "\" SDL_Error: " << SDL_GetError() << endl;
-		return NULL;
-	}
-	return tex;
-}
-#endif

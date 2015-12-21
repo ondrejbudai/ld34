@@ -57,14 +57,6 @@ Renderer::Renderer(int width_, int height_, const char *windowName){
 		return;
 	}
 
-#ifdef ENABLE_TTF
-	if(TTF_Init() == -1){
-		cerr << "SDL_TTF could not initialize! SDL_Error: " << SDL_GetError() << endl;
-		ok = false;
-		return;
-	}
-#endif
-
 	cout << "SDL has been successfully initialized!" << endl;
 }
 
@@ -75,9 +67,6 @@ Renderer::~Renderer(){
 	}
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
-#ifdef ENABLE_TTF
-	TTF_Quit();
-#endif
 	IMG_Quit();
 	SDL_Quit();
 }
@@ -91,25 +80,6 @@ void Renderer::clear(){
 	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xff);
 	SDL_RenderClear(renderer);
 }
-
-#ifdef ENABLE_TTF
-TTF_Font* Renderer::getFont(int size){
-	if(size == 16){
-		return font16;
-	}
-	return font20;
-}
-
-void Renderer::renderText(const char* text, TTF_Font* font, SDL_Color color, int x, int y, enum Align align){
-	Texture* tex;
-
-	tex = Texture::createFromText(text, color, font, this);
-
-	tex->render((align == RIGHT) ? (width - x - tex->getWidth()) : x, y);
-
-	delete tex;
-}
-#endif
 
 void Renderer::renderRect(int x, int y, int w, int h, SDL_Color col){
 	SDL_SetRenderDrawColor(renderer, col.r, col.g, col.b, col.a);
