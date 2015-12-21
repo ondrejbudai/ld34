@@ -6,7 +6,7 @@
 
 //#define ENABLE_TTF
 
-#ifndef ENABLE_TTF
+#ifdef ENABLE_TTF
 #include <SDL2/SDL_ttf.h>
 #endif
 
