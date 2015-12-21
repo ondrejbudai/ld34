@@ -19,6 +19,8 @@ int main(int argc, char* argv[]){
 		return 1;
 	}
 
+	renderer->setOffset(0, 50);
+
 	srand(time(NULL));
 
 	GameState* gs = new Menu(renderer);

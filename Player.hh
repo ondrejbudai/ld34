@@ -14,6 +14,8 @@ class Player : public Listener, public Entity {
 		int health = maxHealth;
 		int maxShield = 500;
 		int shield = maxShield;
+		Texture* healthBar;
+		Texture* shieldBar;
 	public:
 		Player(Renderer* r);
 		~Player(){delete texture;}

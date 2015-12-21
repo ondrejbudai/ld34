@@ -11,6 +11,12 @@ Player::Player(Renderer* renderer_){
 	y = GAME_H / 2;
 	vx = 0;
 	vy = 0;
+
+	healthBar = Texture::createFromFile("img/bar-health.png", renderer);
+	healthBar->setAlpha(63);
+
+	shieldBar = Texture::createFromFile("img/bar-shield.png", renderer);
+	shieldBar->setAlpha(63);
 }
 
 void Player::event(SDL_Event *e){
@@ -56,15 +62,22 @@ void Player::update(){
 }
 
 void Player::render(unsigned l){
-	if(l != 1) return;
+	if(l == 1){
+		SDL_Rect src;
+		src.x = 0;
+		src.y = 0;
+		src.w = (float(health) / maxHealth) * healthBar->getWidth();
+		src.h = healthBar->getHeight();
+		healthBar->renderPart(200, WINDOW_H - renderer->getYOffset() - healthBar->getHeight() / 2 - 10, &src);
 
-	texture->render(x, y);
-
-
-	renderer->renderRect(0, WINDOW_H - 10, WINDOW_W, WINDOW_H, renderer->cBlue);
-	renderer->renderRect(0, WINDOW_H - 10, ((float) shield / maxShield) * WINDOW_W, WINDOW_H, renderer->cYellow);
-	renderer->renderRect(0, WINDOW_H - 5, WINDOW_W, WINDOW_H, renderer->cRed);
-	renderer->renderRect(0, WINDOW_H - 5, ((float) health / maxHealth) * WINDOW_W, WINDOW_H, renderer->cGreen);
+		src.x = 0;
+		src.y = 0;
+		src.w = (float(shield) / maxShield) * shieldBar->getWidth();
+		src.h = shieldBar->getHeight();
+		shieldBar->renderPart(200, -renderer->getYOffset() + shieldBar->getHeight() / 2 + 10, &src);
+	} else if(l == 2) {
+		texture->render(x, y);
+	}
 }
 
 void Player::damage(int amount){

@@ -109,7 +109,7 @@ GameState* Game::update(){
 void Game::render(){
 	static unsigned ticks = 0;
 
-	for(unsigned l = 0; l < 2; l++){
+	for(unsigned l = 0; l < 3; l++){
 		for(auto i = entityList.begin(); i != entityList.end(); ++i){
 			(*i)->render(l);
 		}

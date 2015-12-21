@@ -2,7 +2,12 @@
 #define RENDERER_H_
 
 #include <SDL2/SDL.h>
+
+//#define ENABLE_TTF
+
+#ifndef ENABLE_TTF
 #include <SDL2/SDL_ttf.h>
+#endif
 
 class Renderer {
 private:
@@ -12,13 +17,13 @@ private:
 	TTF_Font* font16, *font20;
 	bool ok;
 	int height, width;
+	int xoff = 0, yoff = 0;
 public:
 enum Align {RIGHT, LEFT};
 	Renderer(int width, int height, const char *windowName);
 	~Renderer();
 	void update();
 	void clear();
-	void renderText(const char* text, TTF_Font* font, SDL_Color color, int x, int y, enum Align align);
 	void renderRect(int x, int y, int w, int h, SDL_Color col);
 	void changeSize(int w, int h){width = w; height = h;}
 
@@ -27,7 +32,9 @@ enum Align {RIGHT, LEFT};
 	TTF_Font* getFont(int size);
 	int getHeight(){return height;}
 	int getWidth(){return width;}
-
+	void setOffset(int xoff_, int yoff_){xoff = xoff_; yoff = yoff_;}
+	int getXOffset(){return xoff;}
+	int getYOffset(){return yoff;}
 
 	const SDL_Color cBlack = {0, 0, 0, 255};
 	const SDL_Color cRed = {255, 0, 0, 255};
@@ -35,6 +42,10 @@ enum Align {RIGHT, LEFT};
 	const SDL_Color cBlue = {0, 0, 255, 255};
 	const SDL_Color cLightblue = {0, 0, 63, 255};
 	const SDL_Color cYellow = {255, 255, 0, 255};
+
+#ifdef ENABLE_TTF
+	void renderText(const char* text, TTF_Font* font, SDL_Color color, int x, int y, enum Align align);
+#endif
 };
 
 #endif

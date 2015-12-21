@@ -5,26 +5,33 @@
 
 class Texture {
 private:
-	Texture(SDL_Surface* from, const Renderer* renderer_);
+	Texture(SDL_Surface* from, Renderer* renderer_);
 	bool ok;
 	SDL_Texture* texture;
 	int w, h;
-	const Renderer* renderer;
+	Renderer* renderer;
+	float scale = 1.0f;
+	float angle = 0;
 public:
 	~Texture();
 	void render(int x, int y);
 	void render(int x, int y, int w, int h);
-	void renderScaled(int x, int y, float scale);
-	void renderShaded(int x, int y, int w_, int h_, int r, int g, int b);
-	void renderShaded(int x, int y, int r, int g, int b);
-	void renderRotated(int x, int y, float angle);
+	void render(SDL_Rect* src, SDL_Rect* dest);
+	void renderPart(int x, int y, SDL_Rect* src);
 
-	static Texture* createFromFile(const char* filename, const Renderer* renderer_);
-	static Texture* createFromText(const char* filename, SDL_Color color, TTF_Font* font, const Renderer* renderer_);
-	static Texture* createFromSurface(SDL_Surface* surface, const Renderer* renderer_);
+	void setAlpha(unsigned alpha);
+	void setAngle(float angle_){angle = angle_;}
+	void setScale(float scale_){scale = scale_;}
+	void setColorMod(SDL_Color* color);
+
+	static Texture* createFromFile(const char* filename, Renderer* renderer_);
+	static Texture* createFromSurface(SDL_Surface* surface, Renderer* renderer_);
+
+#ifdef ENABLE_TTF
+	static Texture* createFromText(const char* filename, SDL_Color color, TTF_Font* font, Renderer* renderer_);
+#endif
 
 	bool isOk(){return ok;}
-	operator SDL_Texture*() {return texture;}
 	int getWidth(){return w;}
 	int getHeight(){return h;}
 };

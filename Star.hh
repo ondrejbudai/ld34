@@ -6,7 +6,6 @@
 
 class Star : public Entity {
 	private:
-		float scale;
 	public:
 		Star(Renderer* renderer, int x_, int y_, float scale, int alpha);
 		~Star(){delete texture;}

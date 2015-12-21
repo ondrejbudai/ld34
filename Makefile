@@ -4,16 +4,22 @@ OBJECTS := $(addprefix obj/,$(SOURCES:.cc=.o))
 
 ifeq ($(target),windows)
 	EXECUTABLE := spacepilot.exe
-	CFLAGS=-c -std=c++11 -Wall -Wextra -pedantic -g -Wl,subsystem,windows -ISDL2-2.0.3/i686-w64-mingw32/include/
-	LDFLAGS= -mwindows -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -LSDL2-2.0.3/i686-w64-mingw32/lib/ -static-libgcc -static-libstdc++ -lm
+	CFLAGS=-c -std=c++11 -Wall -Wextra -pedantic -Wl,subsystem,windows -ISDL2-2.0.3/i686-w64-mingw32/include/
+	LDFLAGS= -mwindows -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -LSDL2-2.0.3/i686-w64-mingw32/lib/ -static-libgcc -static-libstdc++ -lm
 
 else
 	EXECUTABLE := spacepilot
-	CFLAGS=-c -std=c++11 -Wall -Wextra -pedantic -g
-	LDFLAGS= -lSDL2 -lSDL2_image -lSDL2_ttf -lm
+	CFLAGS=-c -std=c++11 -Wall -Wextra -pedantic
+	LDFLAGS= -lSDL2 -lSDL2_image -lm
 endif
 
+debug: CFLAGS+=-g
+debug: all
+
 all: create_dir $(SOURCES) $(EXECUTABLE)
+
+release: CFLAGS+=-O2
+release: all
 
 create_dir:
 	mkdir -p obj
@@ -34,7 +40,7 @@ zip: all
 	ln -s . SpacePilot
 	rm SpacePilot.zip 2>/dev/null || true
 ifeq ($(target),windows)
-	zip SpacePilot.zip SpacePilot/spacepilot* SpacePilot/img/*.png SpacePilot/SDL2.dll SpacePilot/SDL2_image.dll SpacePilot/SDL2_ttf.dll SpacePilot/libfreetype-6.dll SpacePilot/zlib1.dll SpacePilot/libpng16-16.dll SpacePilot/README SpacePilot/LICENSE
+	zip SpacePilot.zip SpacePilot/spacepilot* SpacePilot/img/*.png SpacePilot/SDL2.dll SpacePilot/SDL2_image.dll SpacePilot/zlib1.dll SpacePilot/libpng16-16.dll SpacePilot/README SpacePilot/LICENSE
 else
 	zip SpacePilot.zip SpacePilot/spacepilot* SpacePilot/img/*.png SpacePilot/README SpacePilot/LICENSE
 endif

@@ -31,7 +31,6 @@ Renderer::Renderer(int width_, int height_, const char *windowName){
 		ok = false;
 		return;
 	}
-	//SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	if(renderer == NULL){
@@ -58,20 +57,13 @@ Renderer::Renderer(int width_, int height_, const char *windowName){
 		return;
 	}
 
+#ifdef ENABLE_TTF
 	if(TTF_Init() == -1){
 		cerr << "SDL_TTF could not initialize! SDL_Error: " << SDL_GetError() << endl;
 		ok = false;
 		return;
 	}
-
-	// font20 = TTF_OpenFont("Aero.ttf", 20);
-	// font16 = TTF_OpenFont("Aero.ttf", 16);
-
-	// if(!font16 || !font20){
-	// 	cerr << "Font could not initialize! SDL_Error: " << SDL_GetError() << endl;
-	// 	ok = false;
-	// 	return;
-	// }
+#endif
 
 	cout << "SDL has been successfully initialized!" << endl;
 }
@@ -79,7 +71,9 @@ Renderer::Renderer(int width_, int height_, const char *windowName){
 Renderer::~Renderer(){
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
+#ifdef ENABLE_TTF
 	TTF_Quit();
+#endif
 	IMG_Quit();
 	SDL_Quit();
 }
@@ -94,6 +88,7 @@ void Renderer::clear(){
 	SDL_RenderClear(renderer);
 }
 
+#ifdef ENABLE_TTF
 TTF_Font* Renderer::getFont(int size){
 	if(size == 16){
 		return font16;
@@ -110,9 +105,10 @@ void Renderer::renderText(const char* text, TTF_Font* font, SDL_Color color, int
 
 	delete tex;
 }
+#endif
 
 void Renderer::renderRect(int x, int y, int w, int h, SDL_Color col){
 	SDL_SetRenderDrawColor(renderer, col.r, col.g, col.b, col.a);
-	SDL_Rect rect = {x, y, w, h};
+	SDL_Rect rect = {x + xoff, y + yoff, w, h};
 	SDL_RenderFillRect(renderer, &rect);
 }

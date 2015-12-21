@@ -56,7 +56,7 @@ void Enemy::update(){
 void Enemy::render(unsigned l){
 	const static SDL_Color cRed = {255, 0, 0, 127};
 	const static SDL_Color cGreen = {0, 255, 0, 127};
-	if(l != 1) return;
+	if(l != 2) return;
 	texture->render(x, y);
 	if(health == maxHealth) return;
 	renderer->renderRect(x - texture->getWidth() / 2, y + texture->getHeight() / 2, texture->getWidth(), 5, cRed);

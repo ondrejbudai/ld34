@@ -3,7 +3,7 @@
 
 #include "Texture.hh"
 
-Texture::Texture(SDL_Surface* from, const Renderer* renderer_){
+Texture::Texture(SDL_Surface* from, Renderer* renderer_){
 	using namespace std;
 
 	ok = false;
@@ -24,51 +24,49 @@ Texture::Texture(SDL_Surface* from, const Renderer* renderer_){
 }
 
 void Texture::render(int x, int y){
-	render(x, y, w, h);
+	render(x, y, w * scale, h * scale);
 }
 void Texture::render(int x, int y, int w_, int h_){
 	static SDL_Rect dest;
 
-	dest.x = x - w_ / 2;
-	dest.y = y - h_ / 2;
+	dest.x = x - w_ / 2 + renderer->getXOffset();
+	dest.y = y - h_ / 2 + renderer->getYOffset();
 	dest.w = w_;
 	dest.h = h_;
 
-	SDL_RenderCopy(*renderer, texture, NULL, &dest);
+	render(NULL, &dest);
 }
 
-void Texture::renderScaled(int x, int y, float scale){
-	render(x, y, w * scale, h * scale);
+void Texture::render(SDL_Rect* src, SDL_Rect* dest){
+	if(angle == 0)
+		SDL_RenderCopy(*renderer, texture, src, dest);
+	else
+		SDL_RenderCopyEx(*renderer, texture, NULL, dest, angle, NULL, SDL_FLIP_NONE);
 }
 
-void Texture::renderShaded(int x, int y, int w_, int h_, int r, int g, int b){
-	SDL_SetTextureColorMod(texture, r, g, b);
-	render(x, y, w_, h_);
-	SDL_SetTextureColorMod(texture, 255, 255, 255);
-}
-
-void Texture::renderShaded(int x, int y, int r, int g, int b){
-	SDL_SetTextureColorMod(texture, r, g, b);
-	render(x, y);
-	SDL_SetTextureColorMod(texture, 255, 255, 255);
-}
-
-void Texture::renderRotated(int x, int y, float angle){
+void Texture::renderPart(int x, int y, SDL_Rect* src){
 	static SDL_Rect dest;
-	dest.x = x - w / 2;
-	dest.y = y - h / 2;
-	dest.w = w;
-	dest.h = h;
+	dest.x = x - w / 2 + src->x + renderer->getXOffset();
+	dest.y = y - h / 2 + src->y + renderer->getYOffset();
+	dest.w = src->w;
+	dest.h = src->h;
 
-	SDL_RenderCopyEx(*renderer, texture, NULL, &dest, angle, NULL, SDL_FLIP_NONE);
+	render(src, &dest);
 }
 
+void Texture::setAlpha(unsigned alpha){
+	SDL_SetTextureAlphaMod(texture, alpha);
+}
+
+void Texture::setColorMod(SDL_Color* color){
+	SDL_SetTextureColorMod(texture, color->r, color->g, color->b);
+}
 
 Texture::~Texture(){
 	SDL_DestroyTexture(texture);
 }
 
-Texture* Texture::createFromFile(const char* filename, const Renderer* renderer_){
+Texture* Texture::createFromFile(const char* filename, Renderer* renderer_){
 	using namespace std;
 
 	SDL_Surface* surface = IMG_Load(filename);
@@ -88,7 +86,9 @@ Texture* Texture::createFromFile(const char* filename, const Renderer* renderer_
 	}
 	return tex;
 }
-Texture* Texture::createFromText(const char* text, SDL_Color color, TTF_Font* font, const Renderer* renderer_){
+
+#ifdef ENABLE_TTF
+Texture* Texture::createFromText(const char* text, SDL_Color color, TTF_Font* font, Renderer* renderer_){
 	using namespace std;
 
 	SDL_Surface* surface = TTF_RenderText_Blended(font, text, color);
@@ -108,9 +108,10 @@ Texture* Texture::createFromText(const char* text, SDL_Color color, TTF_Font* fo
 	}
 	return tex;
 }
+#endif
 
 
-Texture* Texture::createFromSurface(SDL_Surface* surface, const Renderer* renderer_){
+Texture* Texture::createFromSurface(SDL_Surface* surface, Renderer* renderer_){
 	using namespace std;
 	Texture* tex = new Texture(surface, renderer_);
 
