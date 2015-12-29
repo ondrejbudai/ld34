@@ -26,7 +26,7 @@ case "$os" in
     sudo apt-get install -qq libsdl2-dev libsdl2-image-dev g++-5
     ;;
   win32)
-    sudo sed -i -e "s/precise/xenial/g" /etc/apt/sources.list
+    sudo sed -i -e "s/trusty/xenial/g" /etc/apt/sources.list
     sudo apt-get update -qq
     sudo apt-get install -qq mingw-w64
     wget https://www.libsdl.org/release/SDL2-devel-2.0.3-mingw.tar.gz
