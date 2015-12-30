@@ -8,6 +8,7 @@ case "$os" in
     sudo add-apt-repository -y ppa:zoogie/sdl2-snapshots
     sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
     sudo apt-get update -y
+    sudo apt-get install -f -y
     sudo apt-get install -y libsdl2-dev:i386 libsdl2-image-dev:i386 g++-5:i386
 
     ;;
