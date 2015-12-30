@@ -5,7 +5,7 @@ OBJECTS := $(addprefix obj/,$(SOURCES:.cc=.o))
 ifeq ($(target),windows)
 	EXECUTABLE := spacepilot.exe
 	CFLAGS=-c -std=c++11 -Wall -Wextra -pedantic -Wl,subsystem,windows -ISDL2-2.0.3/i686-w64-mingw32/include/
-	LDFLAGS= -mwindows -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -LSDL2-2.0.3/i686-w64-mingw32/lib/ -static-libgcc -static-libstdc++ -lm -Wl,-Bstatic -lpthread
+	LDFLAGS= -mwindows -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -LSDL2-2.0.3/i686-w64-mingw32/lib/ -static-libgcc -static-libstdc++ -lm -Wl,-Bstatic -lstdc++ -lpthread
 
 else
 	EXECUTABLE := spacepilot
