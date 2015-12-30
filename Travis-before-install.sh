@@ -4,19 +4,11 @@ set -ex
 
 case "$os" in
   linux32)
-    # Prepare an i386 chroot. This is required as we otherwise can't install
-    # our dependencies to be able to compile a 32bit binary. Ubuntu...
-    chroot="$PWD"/buildroot.i386
-    mkdir -p "$chroot$PWD"
-	sudo apt-get update -qq
-    sudo apt-get install -y debootstrap
-    sudo i386 debootstrap --arch=i386 precise "$chroot"
-    sudo mount --rbind "$PWD" "$chroot$PWD"
-    sudo i386 chroot "$chroot" apt-get install -qq python-software-properties
-    sudo i386 chroot "$chroot" add-apt-repository -y ppa:zoogie/sdl2-snapshots
-    sudo i386 chroot "$chroot" add-apt-repository -y ppa:ubuntu-toolchain-r/test
-    sudo i386 chroot "$chroot" apt-get update -qq
-    sudo i386 chroot "$chroot" apt-get install -qq libsdl2-dev libsdl2-image-dev g++-5 build-essential zip
+    dpkg --add-architecture i386
+    sudo add-apt-repository -y ppa:zoogie/sdl2-snapshots
+    sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+    sudo apt-get update -qq
+    sudo apt-get install -qq libsdl2-dev:i386 libsdl2-image-dev:i386 g++-5:i386
 
     ;;
   linux64)
