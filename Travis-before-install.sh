@@ -4,7 +4,7 @@ set -ex
 
 case "$os" in
   linux32)
-    dpkg --add-architecture i386
+    sudo dpkg --add-architecture i386
     sudo add-apt-repository -y ppa:zoogie/sdl2-snapshots
     sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
     sudo apt-get update -qq
