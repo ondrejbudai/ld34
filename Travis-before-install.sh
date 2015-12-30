@@ -7,8 +7,8 @@ case "$os" in
     sudo dpkg --add-architecture i386
     sudo add-apt-repository -y ppa:zoogie/sdl2-snapshots
     sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-    sudo apt-get update -qq
-    sudo apt-get install -qq libsdl2-dev:i386 libsdl2-image-dev:i386 g++-5:i386
+    sudo apt-get update -y
+    sudo apt-get install -y libsdl2-dev:i386 libsdl2-image-dev:i386 g++-5:i386
 
     ;;
   linux64)
@@ -21,8 +21,8 @@ case "$os" in
     sudo sed -i -e "s/trusty/xenial/g" /etc/apt/sources.list
     sudo apt-get remove -qq fontconfig fontconfig-config
     sudo apt-get update -qq
-    sudo apt-get install -y --only-upgrade dpkg
-    sudo apt-get install -y mingw-w64
+    sudo apt-get install -qq --only-upgrade dpkg
+    sudo apt-get install -qq mingw-w64
     wget https://www.libsdl.org/release/SDL2-devel-2.0.3-mingw.tar.gz
     wget https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.0-mingw.tar.gz
     wget http://libsdl.org/release/SDL2-2.0.3-win32-x86.zip
