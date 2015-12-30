@@ -9,7 +9,7 @@ case "$os" in
     sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
     sudo apt-get update -y
     sudo apt-get remove -y cpp gcc g++
-    sudo apt-get install -y libsdl2-dev:i386 libsdl2-image-dev:i386 g++-5:i386 gcc-5:i386
+    sudo apt-get install -y libsdl2-dev:i386 libsdl2-image-dev:i386 g++-5:i386 gcc-5:i386 binutils:i386
     sudo apt-get install -f -y
 
     ;;
