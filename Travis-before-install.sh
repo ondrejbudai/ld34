@@ -28,8 +28,8 @@ case "$os" in
   win32)
     sudo sed -i -e "s/trusty/xenial/g" /etc/apt/sources.list
     sudo apt-get update -qq
-    sudo apt-get install --only-upgrade dpkg
-    sudo apt-get install mingw-w64
+    sudo apt-get install -y --only-upgrade dpkg
+    sudo apt-get install -y mingw-w64
     wget https://www.libsdl.org/release/SDL2-devel-2.0.3-mingw.tar.gz
     wget https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.0-mingw.tar.gz
     wget http://libsdl.org/release/SDL2-2.0.3-win32-x86.zip
