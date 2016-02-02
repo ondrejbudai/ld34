@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
-project(spacepilot)
+project(spacepilot NONE)
 
 set(TARGET "linux64" CACHE STRING "use linux64/linux32/win32")
 set(OPT "debug" CACHE STRING "use debug/release")
