@@ -5,7 +5,7 @@ set -x
 
 case "${os}" in
   linux32)
-    cmake -DOPT:STRING=release -DTARGET:STRING=linux32 -DCMAKE_CXX_COMPILER=g++-5 -DCMAKE_CC_COMPILER=gcc-5 .
+    cmake -DOPT:STRING=release -DTARGET:STRING=linux32 -DCMAKE_CXX_COMPILER=g++-5 -DCMAKE_C_COMPILER=gcc-5 .
     make clean
     make zip
     ;;
