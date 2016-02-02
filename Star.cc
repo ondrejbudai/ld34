@@ -1,7 +1,7 @@
 #include "Star.hh"
 #include "global.hh"
 
-Star::Star(Renderer* renderer, int x_, int y_, float scale, int alpha){
+Star::Star(int id_, Renderer& renderer_, int x_, int y_, float scale, int alpha) : Entity(id_, renderer_) {
 	texture = new Texture("img/star.png", renderer);
 	x = x_;
 	y = y_;

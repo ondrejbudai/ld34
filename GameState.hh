@@ -5,14 +5,21 @@
 #include "InputHandler.hh"
 
 class GameState {
-	protected:
-		InputHandler* inputHandler;
-		Renderer* renderer;
-	public:
-		GameState(Renderer* renderer_){inputHandler = new InputHandler(); renderer = renderer_;}
-		virtual ~GameState(){}
-		virtual GameState *update(){return NULL;}
-		virtual void render(){}
+protected:
+    Renderer& renderer;
+    InputHandler inputHandler;
+public:
+    GameState(Renderer& renderer_) : renderer(renderer_), inputHandler() { }
+
+    GameState(const GameState&) = delete;
+
+    GameState& operator=(const GameState&) = delete;
+
+    virtual ~GameState() { }
+
+    virtual GameState* update() { return nullptr; }
+
+    virtual void render() { }
 };
 
 #endif

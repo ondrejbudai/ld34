@@ -10,18 +10,24 @@ using std::map;
 
 class InputHandler {
 private:
-	
-	map<SDL_Keycode,Listener *> keyListeners;
-	Listener* resizeListener;
+
+    map<SDL_Keycode, Listener*> keyListeners{};
+    Listener* resizeListener = nullptr;
 
 public:
-	InputHandler();
-	bool update();
+    InputHandler() { }
 
-	void registerKey(SDL_Keycode keycode, Listener* listener) {keyListeners[keycode] = listener;}
-	void registerResize(Listener* listener){resizeListener = listener;}
+    InputHandler(const InputHandler&) = delete;
 
-	void clearKeys(){keyListeners.clear();}
+    InputHandler& operator=(const InputHandler&) = delete;
+
+    bool update();
+
+    void registerKey(SDL_Keycode keycode, Listener* listener) { keyListeners[keycode] = listener; }
+
+    void registerResize(Listener* listener) { resizeListener = listener; }
+
+    void clearKeys() { keyListeners.clear(); }
 };
 
 #endif

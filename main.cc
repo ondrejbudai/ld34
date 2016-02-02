@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstdlib>
 #include <ctime>
 #include <vector>
 #include <algorithm>
@@ -10,44 +9,43 @@
 #include "Menu.hh"
 #include "global.hh"
 
-int main(int argc, char* argv[]){
-	(void) argc; (void) argv;
-	
-	Renderer* renderer = new Renderer(WINDOW_W, WINDOW_H, "Space Pilot");
-	if(!renderer->isOk()){
-		std::cout << "Ending program" << std::endl;
-		return 1;
-	}
+int main(int argc, char* argv[]) {
+    (void) argc;
+    (void) argv;
 
-	renderer->setOffset(0, 50);
+    Renderer renderer(WINDOW_W, WINDOW_H, "Space Pilot");
+    if (!renderer.isOk()) {
+        std::cout << "Ending program" << std::endl;
+        return 1;
+    }
 
-	srand(time(NULL));
+    renderer.setOffset(0, 50);
 
-	GameState* gs = new Menu(renderer);
+    srand(time(nullptr));
 
-	unsigned lastFrame = SDL_GetTicks();
-	while(gs != NULL){
+    GameState* gs = new Menu(renderer);
+
+    unsigned lastFrame = SDL_GetTicks();
+    while (gs != nullptr) {
 
 
-		if(lastFrame + 1000 > SDL_GetTicks() * 60){
-			SDL_Delay(1);
-			continue;
-		}
+        if (lastFrame + 1000 > SDL_GetTicks() * 60) {
+            SDL_Delay(1);
+            continue;
+        }
 
-		lastFrame += 1000;
-		GameState* tmp;
-		tmp = gs->update();
-		renderer->clear();
-		gs->render();
-		renderer->update();
+        lastFrame += 1000;
+        GameState* tmp;
+        tmp = gs->update();
+        renderer.clear();
+        gs->render();
+        renderer.update();
 
-		if(gs != tmp)
-			delete gs;
+        if (gs != tmp)
+            delete gs;
 
-		gs = tmp;
-	}
+        gs = tmp;
+    }
 
-	delete renderer;
-
-	return 0;
+    return 0;
 }

@@ -4,19 +4,19 @@
 #include "global.hh"
 
 typedef enum {
-	E_NORMAL,
-	E_END
+    E_NORMAL,
+    E_END
 } EnemyType;
 
 typedef struct {
-	unsigned start;
-	EnemyType enemyType;
-	int x;
-	int y;
-	int vx;
-	int vy;
+    unsigned start;
+    EnemyType enemyType;
+    int x;
+    int y;
+    int vx;
+    int vy;
 } Level;
 
-extern Level * levels;
+extern Level* levels;
 
 #endif

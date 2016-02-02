@@ -1,22 +1,19 @@
 #include "Player.hh"
 #include "Bullet.hh"
 #include "Game.hh"
-#include "global.hh"
 
 
-Player::Player(Renderer* renderer_){
-	renderer = renderer_;
+Player::Player(int id_, Renderer& renderer_) : Entity(id_, renderer_),
+                                               healthBar{"img/bar-health.png", renderer},
+                                               shieldBar{"img/bar-shield.png", renderer} {
 	texture = new Texture("./img/player.png", renderer);
 	x = texture->getWidth() / 2 + 50;
 	y = GAME_H / 2;
 	vx = 0;
 	vy = 0;
 
-	healthBar = new Texture("img/bar-health.png", renderer);
-	healthBar->setAlpha(63);
-
-	shieldBar = new Texture("img/bar-shield.png", renderer);
-	shieldBar->setAlpha(63);
+    healthBar.setAlpha(63);
+    shieldBar.setAlpha(63);
 }
 
 void Player::event(SDL_Event *e){
@@ -49,8 +46,8 @@ void Player::update(){
 
 	if(cooldown == 0){
 		Game *g = Game::getInstance();
-		g->addEntity(new Bullet(renderer, x + texture->getWidth() / 2, y - 28, 20, 0, isEnemy()));
-		g->addEntity(new Bullet(renderer, x + texture->getWidth() / 2, y + 28, 20, 0, isEnemy()));
+        g->addEntity(new Bullet(g->getNextId(), renderer, x + texture->getWidth() / 2, y - 28, 20, 0, isEnemy()));
+        g->addEntity(new Bullet(g->getNextId(), renderer, x + texture->getWidth() / 2, y + 28, 20, 0, isEnemy()));
 		cooldown = 4;
 	}
 
@@ -66,15 +63,15 @@ void Player::render(unsigned l){
 		SDL_Rect src;
 		src.x = 0;
 		src.y = 0;
-		src.w = (float(health) / maxHealth) * healthBar->getWidth();
-		src.h = healthBar->getHeight();
-		healthBar->renderPart(200, WINDOW_H - renderer->getYOffset() - healthBar->getHeight() / 2 - 10, &src);
+        src.w = (float(health) / maxHealth) * healthBar.getWidth();
+        src.h = healthBar.getHeight();
+        healthBar.renderPart(200, WINDOW_H - renderer.getYOffset() - healthBar.getHeight() / 2 - 10, &src);
 
 		src.x = 0;
 		src.y = 0;
-		src.w = (float(shield) / maxShield) * shieldBar->getWidth();
-		src.h = shieldBar->getHeight();
-		shieldBar->renderPart(200, -renderer->getYOffset() + shieldBar->getHeight() / 2 + 10, &src);
+        src.w = (float(shield) / maxShield) * shieldBar.getWidth();
+        src.h = shieldBar.getHeight();
+        shieldBar.renderPart(200, -renderer.getYOffset() + shieldBar.getHeight() / 2 + 10, &src);
 	} else if(l == 2) {
 		texture->render(x, y);
 	}

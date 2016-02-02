@@ -10,14 +10,22 @@ class Player : public Listener, public Entity {
 	private:
 		unsigned cooldown = 0;
 		bool up = false, down = false;
-		int maxHealth = 1000;
+	static constexpr int maxHealth = 1000;
 		int health = maxHealth;
-		int maxShield = 500;
+	static constexpr int maxShield = 500;
 		int shield = maxShield;
-		Texture* healthBar;
-		Texture* shieldBar;
+	Texture healthBar;
+	Texture shieldBar;
 	public:
-		Player(Renderer* r);
+	Player(int id_, Renderer& r);
+
+	Player(const Player&) = delete;
+
+	Player(const Player&&) = delete;
+
+	Player& operator=(const Player&) = delete;
+
+	Player& operator=(const Player&&) = delete;
 		~Player(){delete texture;}
 		void event(SDL_Event *e);
 		void update();

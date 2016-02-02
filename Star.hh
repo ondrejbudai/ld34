@@ -7,10 +7,12 @@
 class Star : public Entity {
 	private:
 	public:
-		Star(Renderer* renderer, int x_, int y_, float scale, int alpha);
+	Star(int id_, Renderer& renderer, int x_, int y_, float scale, int alpha);
 		~Star(){delete texture;}
-		bool colliding(int x_, int y_){(void)x_;(void)y_;return false;}
-		bool colliding(Entity *e){(void)e;return false;}
+
+	bool colliding(int, int) { return false; }
+
+	bool colliding(Entity&) { return false; }
 		void render(unsigned l);
 };
 

@@ -6,13 +6,18 @@
 #include "Texture.hh"
 
 class Bullet : public Entity {
-	private:
-		bool isEnemy;
-	public:
-		Bullet(Renderer *Renderer_, int x_, int y_, float vx_, float vy_, bool isEnemy);
-		~Bullet(){delete texture;}
-		void update();
-		bool colliding(int x_, int y_){(void)x_;(void)y_;return false;}
+private:
+    bool isEnemy;
+public:
+    Bullet(int id, Renderer& Renderer_, int x_, int y_, float vx_, float vy_, bool isEnemy);
+
+    ~Bullet() { delete texture; }
+
+    void update();
+
+    bool colliding(Entity&) { return false; }
+
+    bool colliding(int, int) { return false; }
 };
 
 #endif

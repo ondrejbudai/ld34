@@ -17,6 +17,10 @@ private:
 public:
 enum Align {RIGHT, LEFT};
 	Renderer(int width, int height, const char *windowName);
+
+	Renderer(const Renderer&) = delete;
+
+	Renderer& operator=(const Renderer&) = delete;
 	~Renderer();
 	void update();
 	void clear();

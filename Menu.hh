@@ -9,12 +9,16 @@
 class Menu : public Listener, public GameState {
 	private:
 		bool running = true;
-		Texture* logoTex;
-		Texture* playerTex;
-		Texture* enemyTex;
-		Texture* guideTex[2];
+	Texture logoTex;
+	Texture playerTex;
+	Texture enemyTex;
+	Texture guideTex[2];
 	public:
-		Menu(Renderer* renderer_);
+	Menu(Renderer& renderer_);
+
+	Menu(const Menu&) = delete;
+
+	Menu& operator=(const Menu&) = delete;
 		~Menu(){}
 		GameState* update();
 		void render();

@@ -2,7 +2,6 @@
 #include <SDL2/SDL_image.h>
 
 #include "Renderer.hh"
-#include "Texture.hh"
 
 bool Renderer::initialized = false;
 
@@ -26,14 +25,14 @@ Renderer::Renderer(int width_, int height_, const char *windowName){
 	}
 
 	window = SDL_CreateWindow(windowName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
-	if(window == NULL){
+	if (!window) {
 		cerr << "SDL_Window could not initialize! SDL_Error: " << SDL_GetError() << endl;
 		ok = false;
 		return;
 	}
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	if(renderer == NULL){
+	if (!renderer) {
 		cerr << "SDL_Renderer could not initialize! SDL_Error: " << SDL_GetError() << endl;
 		ok = false;
 		return;
@@ -61,9 +60,9 @@ Renderer::Renderer(int width_, int height_, const char *windowName){
 }
 
 Renderer::~Renderer(){
-	for(auto i = availableTextures.begin(); i != availableTextures.end(); ++i){
-		if(i->second == nullptr) continue;
-		SDL_DestroyTexture(i->second);
+	for (auto& i : availableTextures) {
+		if (i.second == nullptr) continue;
+		SDL_DestroyTexture(i.second);
 	}
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);

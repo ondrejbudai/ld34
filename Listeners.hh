@@ -5,8 +5,9 @@
 
 class Listener {
 public:
-	virtual ~Listener(){}
-	virtual void event(SDL_Event *e) = 0;
+    virtual ~Listener() { }
+
+    virtual void event(SDL_Event* e) = 0;
 };
 
 #endif
