@@ -10,14 +10,14 @@ void Entity::update() {
         Game::getInstance()->removeEntity(id);
 }
 
-bool Entity::colliding(int x_, int y_) {
+bool Entity::colliding(int x_, int y_) const {
     return x_ > x - texture->getWidth() / 2
            && x_ < x + texture->getWidth() / 2
            && y_ > y - texture->getHeight() / 2
            && y_ < y + texture->getHeight() / 2;
 }
 
-bool Entity::colliding(Entity& e) {
+bool Entity::colliding(Entity& e) const {
     return !(
             x + texture->getWidth() < e.getX() ||
             e.getX() + e.getW() < x ||

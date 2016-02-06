@@ -22,25 +22,25 @@ public:
 
     virtual void update();
 
-    virtual void render(unsigned l) { if (texture && level == l) texture->render(x, y); }
+    virtual void render(unsigned l) const { if (texture && level == l) texture->render(x, y); }
 
     virtual ~Entity() { }
 
-    virtual bool colliding(int x_, int y_);
+    virtual bool colliding(int x_, int y_) const;
 
-    virtual bool colliding(Entity& e);
+    virtual bool colliding(Entity& e) const;
 
     virtual void damage(int amount) { (void) amount; }
 
-    virtual bool isEnemy() { return false; }
+    virtual bool isEnemy() const { return false; }
 
-    int getX() { return x; }
+    int getX() const { return x; }
 
-    int getY() { return y; }
+    int getY() const { return y; }
 
-    int getW() { return texture->getWidth(); }
+    int getW() const { return texture->getWidth(); }
 
-    int getH() { return texture->getHeight(); }
+    int getH() const { return texture->getHeight(); }
 };
 
 #endif

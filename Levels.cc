@@ -6,7 +6,7 @@ const unsigned w2 = w1 + 1150;
 const unsigned w3 = w2 + 850;
 const unsigned w4 = w3 + 800;
 
-static Level ilevels[] = {
+Level ilevels[] = {
         {w0 + 0,        E_NORMAL, 20, 0,    -SCROLL_SPEED / 2, 0},
         {w0 + 100,      E_NORMAL, 20, 50,   -SCROLL_SPEED / 2, 0},
         {w0 + 100,      E_NORMAL, 20, -50,  -SCROLL_SPEED / 2, 0},

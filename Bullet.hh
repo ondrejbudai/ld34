@@ -15,9 +15,9 @@ public:
 
     void update();
 
-    bool colliding(Entity&) { return false; }
+    bool colliding(Entity&) const { return false; }
 
-    bool colliding(int, int) { return false; }
+    bool colliding(int, int) const { return false; }
 };
 
 #endif

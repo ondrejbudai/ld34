@@ -10,7 +10,7 @@ Star::Star(int id_, Renderer& renderer_, int x_, int y_, float scale, int alpha)
 	texture->setScale(scale);
 }
 
-void Star::render(unsigned l){
+void Star::render(unsigned l) const {
 	if(l != 0) return;
 	texture->render(x, y);
 }

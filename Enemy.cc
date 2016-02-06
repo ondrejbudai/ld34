@@ -52,7 +52,7 @@ void Enemy::update() {
     cooldown--;
 }
 
-void Enemy::render(unsigned l) {
+void Enemy::render(unsigned l) const {
     const static SDL_Color cRed = {255, 0, 0, 127};
     const static SDL_Color cGreen = {0, 255, 0, 127};
     if (l != 2) return;

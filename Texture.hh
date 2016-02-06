@@ -30,19 +30,25 @@ public:
 	Texture& operator=(const Texture&) = delete;
 
 	~Texture() { }
-	void render(int x, int y);
-	void render(int x, int y, int w, int h);
-	void render(SDL_Rect* src, SDL_Rect* dest);
-	void renderPart(int x, int y, SDL_Rect* src);
+
+	void render(int x, int y) const;
+
+	void render(int x, int y, int w, int h) const;
+
+	void render(SDL_Rect* src, SDL_Rect* dest) const;
+
+	void renderPart(int x, int y, SDL_Rect* src) const;
 
 	void setAlpha(int alpha_) { alpha = alpha_; }
 	void setAngle(float angle_){angle = angle_;}
 	void setScale(float scale_){scale = scale_;}
 	void setColorMod(SDL_Color* colormod_){colormod = colormod_;}
 
-	bool isOk(){return ok;}
-	int getWidth(){return w;}
-	int getHeight(){return h;}
+	bool isOk() const { return ok; }
+
+	int getWidth() const { return w; }
+
+	int getHeight() const { return h; }
 };
 
 #endif

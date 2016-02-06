@@ -5,15 +5,17 @@
 #include <iostream>
 
 class Star : public Entity {
-	private:
-	public:
-	Star(int id_, Renderer& renderer, int x_, int y_, float scale, int alpha);
-		~Star(){delete texture;}
+private:
+public:
+    Star(int id_, Renderer& renderer, int x_, int y_, float scale, int alpha);
 
-	bool colliding(int, int) { return false; }
+    ~Star() { delete texture; }
 
-	bool colliding(Entity&) { return false; }
-		void render(unsigned l);
+    bool colliding(int, int) const { return false; }
+
+    bool colliding(Entity&) const { return false; }
+
+    void render(unsigned l) const;
 };
 
 #endif

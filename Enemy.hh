@@ -17,11 +17,11 @@ public:
 
     void update();
 
-    void render(unsigned l);
+    void render(unsigned l) const;
 
     void damage(int amount);
 
-    bool isEnemy() { return true; }
+    bool isEnemy() const { return true; }
 };
 
 #endif
