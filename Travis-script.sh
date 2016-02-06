@@ -15,7 +15,7 @@ case "${os}" in
     make VERBOSE=1 zip || true
     ;;
   win32)
-    cmake -DOPT:STRING=release -DTARGET:STRING=win32 -DCMAKE_C_COMPILER=i686-w64-mingw32-gcc -DCMAKE_CXX_COMPILER=i686-w64-mingw32-g++-posix -DCMAKE_SYSTEM_NAME=Windows .
+    cmake -DCMAKE_TOOLCHAIN_FILE=mingw-toolchain.cmake -DOPT:STRING=release -DTARGET:STRING=win32 .
     make clean
     make VERBOSE=1 zip
     ;;
