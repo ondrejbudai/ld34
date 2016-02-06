@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ln -s . SpacePilot 2>/dev/null || true
 rm SpacePilot.zip 2>/dev/null || true
