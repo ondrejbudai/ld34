@@ -45,9 +45,9 @@ void Player::update() {
         y = GAME_H - texture->getHeight() / 2;
 
     if (cooldown == 0) {
-        Game* g = Game::getInstance();
-        g->addEntity(new Bullet(g->getNextId(), renderer, x + texture->getWidth() / 2, y - 28, 20, 0, isEnemy()));
-        g->addEntity(new Bullet(g->getNextId(), renderer, x + texture->getWidth() / 2, y + 28, 20, 0, isEnemy()));
+        Game& g = Game::getInstance();
+        g.addEntity(new Bullet(g.getNextId(), renderer, x + texture->getWidth() / 2, y - 28, 20, 0, isEnemy()));
+        g.addEntity(new Bullet(g.getNextId(), renderer, x + texture->getWidth() / 2, y + 28, 20, 0, isEnemy()));
         cooldown = 4;
     }
 

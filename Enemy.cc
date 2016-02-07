@@ -20,14 +20,14 @@ void Enemy::update() {
         vy = -vy;
     }
 
-    Game* g = Game::getInstance();
+    Game& g = Game::getInstance();
 
     if (x < 0) {
-        g->removeEntity(this);
+        g.removeEntity(this);
         return;
     }
 
-    Player& p = g->getPlayer();
+    Player& p = g.getPlayer();
     if (colliding(p)) {
         int pHealth = p.getHealth();
         int d = pHealth < health ? pHealth : health;
@@ -45,7 +45,7 @@ void Enemy::update() {
             dx = dx / magnitude * 10;
             dy = dy / magnitude * 10;
 
-            g->addEntity(new Bullet(g->getNextId(), renderer, x - 50, y, dx, dy, isEnemy()));
+            g.addEntity(new Bullet(g.getNextId(), renderer, x - 50, y, dx, dy, isEnemy()));
             cooldown = 50;
         }
     }
@@ -66,5 +66,5 @@ void Enemy::render(unsigned l) const {
 void Enemy::damage(int amount) {
     health -= amount;
     if (health <= 0)
-        Game::getInstance()->removeEntity(this);
+        Game::getInstance().removeEntity(this);
 }

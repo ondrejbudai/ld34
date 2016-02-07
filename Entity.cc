@@ -7,7 +7,7 @@ void Entity::update() {
     y += vy;
 
     if (x < 0 || x > GAME_W || y < 0 || y > GAME_H)
-        Game::getInstance()->removeEntity(this);
+        Game::getInstance().removeEntity(this);
 }
 
 bool Entity::colliding(int x_, int y_) const {

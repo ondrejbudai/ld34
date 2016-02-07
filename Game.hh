@@ -55,7 +55,7 @@ public:
 
     Player& getPlayer() { return *player; }
 
-    static Game* getInstance() { return Game::instance; }
+    static Game& getInstance() { return *Game::instance; }
 
 };
 
