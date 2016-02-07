@@ -16,12 +16,12 @@ void Bullet::update() {
     y += vy;
     Game* g = Game::getInstance();
     if (x > GAME_W || x < 0 || y > GAME_H || y < 0)
-        g->removeEntity(id);
+        g->removeEntity(this);
 
     Entity* e = g->getColliding(*this, x, y);
     if (e == nullptr)
         return;
-    g->removeEntity(id);
+    g->removeEntity(this);
     if (e->isEnemy() == isEnemy)
         return;
     e->damage(200);

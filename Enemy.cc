@@ -23,7 +23,7 @@ void Enemy::update() {
     Game* g = Game::getInstance();
 
     if (x < 0) {
-        g->removeEntity(id);
+        g->removeEntity(this);
         return;
     }
 
@@ -66,5 +66,5 @@ void Enemy::render(unsigned l) const {
 void Enemy::damage(int amount) {
     health -= amount;
     if (health <= 0)
-        Game::getInstance()->removeEntity(id);
+        Game::getInstance()->removeEntity(this);
 }

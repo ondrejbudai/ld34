@@ -18,7 +18,7 @@ private:
     Player* player;
     std::unordered_map<int, std::unique_ptr<Entity>> entityList{};
     std::vector<Entity*> toAddList{};
-    std::vector<int> toDelList{};
+    std::vector<const Entity*> toDelList{};
     Level* current = levels;
     unsigned ticks = 0;
     bool close = false;
@@ -49,7 +49,7 @@ public:
 
     void addEntity(Entity* e);
 
-    void removeEntity(int id);
+    void removeEntity(const Entity* e);
 
     Entity* getColliding(Entity& e, int x, int y);
 

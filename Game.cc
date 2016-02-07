@@ -27,8 +27,8 @@ void Game::addEntity(Entity* e) {
     toAddList.push_back(e);
 }
 
-void Game::removeEntity(int id) {
-    toDelList.push_back(id);
+void Game::removeEntity(const Entity* e) {
+    toDelList.push_back(e);
 }
 
 Entity* Game::getColliding(Entity& e, int x, int y) {
@@ -87,8 +87,8 @@ GameState* Game::update() {
     }
     toAddList.clear();
 
-    for (auto id : toDelList) {
-        entityList.erase(id);
+    for (auto e : toDelList) {
+        entityList.erase(e->id);
     }
     toDelList.clear();
 
